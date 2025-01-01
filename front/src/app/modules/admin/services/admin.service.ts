@@ -55,8 +55,8 @@ export class AdminService {
   }
 
   // Modifier une voiture existante
-  updateVoiture(voiture: VoitureModele): Observable<VoitureModele> {
-    return this.http.put<VoitureModele>(`${this.apiUrl4}/${voiture.id}`, voiture);
+  updateVoiture(voitureId: number, voiture: FormData): Observable<VoitureModele> {
+    return this.http.put<any>(`${this.apiUrl4_1}/modifier/${voitureId}`, voiture);
   }
 
                              /////////// les Reservations /////////////////

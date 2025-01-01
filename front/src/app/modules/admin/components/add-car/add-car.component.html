@@ -1,4 +1,4 @@
-<div class="container mt-5" >
+<div>
     <h2 class="text-center mb-4">Ajouter une Voiture</h2>
     <form (ngSubmit)="onSubmit()" #carForm="ngForm" enctype="multipart/form-data">
       <div class="form-group">
@@ -48,6 +48,17 @@
       <div class="form-group">
         <label for="file">Image</label>
         <input type="file" id="file" class="form-control" (change)="onFileSelected($event)" required />
+      </div>
+
+      <div
+        *ngIf="message"
+        class="alert"
+        [ngClass]="{
+          'alert-success': !isError,
+          'alert-danger': isError
+        }"
+        >
+        {{ message }}
       </div>
   
       <button type="submit"  class="btn btn-primary btn-block mt-3" [disabled]="!carForm.form.valid">Ajouter</button>

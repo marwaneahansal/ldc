@@ -1,4 +1,4 @@
-<div *ngIf="!showAddCarModal">
+<div *ngIf="!showAddCarModal && !showUpdateCarModal">
   <div class="container">
     <h2>Liste des Voitures</h2>
 
@@ -34,7 +34,7 @@
           <td>{{ voiture.description }}</td>
           <td>
             <!-- Boutons pour modifier et supprimer -->
-            <button class="btn-edit">Modifier</button>
+            <button type="button" class="btn-edit" (click)="updateCar(voiture)">Modifier</button>
             <button (click)="deleteCar(voiture.id)" class="btn-delete">Supprimer</button>
           </td>
         </tr>
@@ -64,4 +64,24 @@
   </div>
 </div>
 
+
+<div
+  class="modal fade"
+  id="updateCarModal"
+  tabindex="1"
+  aria-labelledby="updateCarModalLabel"
+  aria-hidden="true"
+  [ngClass]="{ 'show d-block': showUpdateCarModal && updatedCar }"
+  >
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" (click)="closeUpdateCar()" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <app-update-car [car]="updatedCar"></app-update-car>
+      </div>
+    </div>
+  </div>
+</div>
   

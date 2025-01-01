@@ -45,7 +45,9 @@ public class CarsServiceImpl implements CarsService {
 		car.setType(carsRequest.getType());
 		car.setTarif(carsRequest.getTarif());
 		car.setEtat(carsRequest.getEtat());
-		car.setImage(carsRequest.getImage());
+		if (carsRequest.getImage() != null) {
+			car.setImage(carsRequest.getImage());
+		}
 		car.setDescription(carsRequest.getDescription());
 		Car updatedCar = carsRepository.save(car);
 

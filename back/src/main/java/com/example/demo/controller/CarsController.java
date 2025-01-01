@@ -83,9 +83,43 @@ public class CarsController {
 
     // Modifier une voiture existante
     @PutMapping("/modifier/{id}")
-    public ResponseEntity<CarsDto> updateCar(@PathVariable Long id, @RequestBody CarsRequest carsRequest) {
-        CarsDto updatedCar = carsService.modifierCars(id, carsRequest);
-        return ResponseEntity.ok(updatedCar);
+    public ResponseEntity<CarsDto> updateCar(@PathVariable Long id,
+            @RequestParam(value = "file", required = false) MultipartFile file,
+            @RequestParam("marque") String marque,
+            @RequestParam("modele") int modele,
+            @RequestParam("annee") int annee,
+            @RequestParam("etat") String etat,
+            @RequestParam("tarif") double tarif,
+            @RequestParam("type") String type,
+            @RequestParam("description") String description)
+    {
+        try {
+            CarsRequest carsRequest = new CarsRequest();
+            if (file != null) {
+                // Sauvegarde de l'image dans le dossier "assets"
+                String uploadDir = System.getProperty("user.dir") + "/src/main/resources/static/assets/";
+                File directory = new File(uploadDir);
+                if (!directory.exists()) {
+                    directory.mkdirs();
+                }
+                String filePath = uploadDir + file.getOriginalFilename();
+                file.transferTo(new File(filePath));
+                carsRequest.setImage("assets/" + file.getOriginalFilename());
+            }
+            carsRequest.setMarque(marque);
+            carsRequest.setModele(modele);
+            carsRequest.setAnnee(annee);
+            carsRequest.setEtat(etat);
+            carsRequest.setTarif(tarif);
+            carsRequest.setType(type);
+            carsRequest.setDescription(description);
+
+            CarsDto updatedCar = carsService.modifierCars(id, carsRequest);
+            return ResponseEntity.ok(updatedCar);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).build();
+        }
     }
 
     // Supprimer une voiture par ID

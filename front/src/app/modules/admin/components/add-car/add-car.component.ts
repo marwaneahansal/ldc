@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -9,12 +9,15 @@ import { ListCarsComponent } from '../list-cars/list-cars.component';
 @Component({
   selector: 'app-add-car',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './add-car.component.html',
-  styleUrl: './add-car.component.scss'
+  styleUrl: './add-car.component.scss',
 })
 export class AddCarComponent {
-  car : VoitureModele={
+  message: string = "";
+  isError: boolean = false;
+
+  car: VoitureModele = {
     id: 0,
     marque: '',
     modele: '',
@@ -23,10 +26,9 @@ export class AddCarComponent {
     tarif: 0,
     etat: '',
     image: '',
-    description: ''
+    description: '',
   };
- 
-  
+
   selectedFile: File | null = null;
   constructor(private adminService: AdminService) {}
 
@@ -39,6 +41,8 @@ export class AddCarComponent {
 
   onSubmit(): void {
     if (this.selectedFile) {
+      this.message = "";
+      this.isError = false;
       const formData = new FormData();
       formData.append('file', this.selectedFile);
       formData.append('marque', this.car.marque);
@@ -52,10 +56,13 @@ export class AddCarComponent {
       this.adminService.addVoiture(formData).subscribe({
         next: (response) => {
           console.log('Voiture ajoutée avec succès', response);
+          this.message = "Voiture ajoutée avec succès";
         },
         error: (err) => {
+          this.isError = true;
+          this.message = "Erreur lors de l’ajout de la voiture";
           console.error('Erreur lors de l’ajout de la voiture :', err);
-        }
+        },
       });
     }
   }
