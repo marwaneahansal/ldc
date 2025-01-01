@@ -1,0 +1,48 @@
+<div class="cars-section">
+    <h2>Nos Voitures</h2>
+  
+    <!-- Formulaire de recherche -->
+    <form class="search-form" (ngSubmit)="searchCars()">
+      <label for="date">Date :</label>
+      <input type="date" [(ngModel)]="searchFilters.date" name="date" />
+  
+      <label for="type">Type :</label>
+      <select [(ngModel)]="searchFilters.type" name="type">
+        <option value="">Tous</option>
+        <option value="SUV">SUV</option>
+        <option value="Berline">Berline</option>
+        <option value="Compacte">Compacte</option>
+      </select>
+      <label for="type">Etat :</label>
+      <select [(ngModel)]="searchFilters.etat" name="etat">
+        <option value="">Disponible</option>
+        <option value="SUV">EN attente</option>
+        <option value="Berline">Reservee</option>
+        
+      </select>
+  
+      <label for="brand">Marque :</label>
+      <input type="text" [(ngModel)]="searchFilters.marque" name="brand" placeholder="Marque" />
+  
+      <label for="price">Tarif Max (€) :</label>
+      <input type="number" [(ngModel)]="searchFilters.tarif" name="price" placeholder="Tarif" />
+  
+      <button type="submit">Rechercher</button>
+    </form>
+  
+    <!-- Liste des voitures -->
+    <div class="cars-list">
+      <div *ngFor="let car of filteredCars" class="car-card">
+        <img [src]="car.image" [alt]="car.marque + ' ' + car.modele" />
+        <h3>{{ car.marque }} {{ car.modele }}</h3>
+        <p>Année : {{ car.annee }}</p>
+        <p>Type : {{ car.type }}</p>
+        <p>Tarif : {{ car.tarif }} €/jour</p>
+        <p>Etat : {{ car.etat }} </p>
+        <button [routerLink]="['/details', car.id]">Détails</button>
+
+        <button (click)="reserveCar(car)">Réserver</button>
+      </div>
+    </div>
+  </div>
+ 

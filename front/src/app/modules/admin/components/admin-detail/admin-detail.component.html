@@ -1,0 +1,140 @@
+<div class="admin-container">
+  <!-- Section gauche : Détails de l'administrateur -->
+  <div class="admin-details-container">
+    <h2 class="admin-title">Détails de l'administrateur</h2>
+    <div
+      *ngIf="message"
+      class="alert"
+      [ngClass]="{
+        'alert-success': message.includes('succès'),
+        'alert-danger': message.includes('erreur')
+      }"
+    >
+      {{ message }}
+    </div>
+    <!-- Formulaire pour l'édition -->
+    <form class="admin-form" (ngSubmit)="enregistrer()">
+      <div class="admin-detail-item">
+        <label for="nom">Nom :</label>
+        <input
+          id="nom"
+          [(ngModel)]="adminInfo.nom"
+          name="nom"
+          required
+          class="admin-input"
+        />
+      </div>
+      <div class="admin-detail-item">
+        <label for="prenom">Prénom :</label>
+        <input
+          id="prenom"
+          [(ngModel)]="adminInfo.prenom"
+          name="prenom"
+          required
+          class="admin-input"
+        />
+      </div>
+      <div class="admin-detail-item">
+        <label for="email">Email :</label>
+        <input
+          id="email"
+          [(ngModel)]="adminInfo.email"
+          name="email"
+          type="email"
+          required
+          class="admin-input"
+        />
+      </div>
+      <div class="admin-detail-item">
+        <label for="numero_tel">Téléphone :</label>
+        <input
+          id="numero_tel"
+          [(ngModel)]="adminInfo.numero_tel"
+          name="numero_tel"
+          type="tel"
+          required
+          class="admin-input"
+        />
+      </div>
+      <div class="admin-detail-item">
+        <label for="adresse">Adresse :</label>
+        <input
+          id="adresse"
+          [(ngModel)]="adminInfo.adresse"
+          name="adresse"
+          required
+          class="admin-input"
+        />
+      </div>
+
+      <!-- Boutons d'action -->
+      <div class="admin-buttons">
+        <button type="submit" class="admin-button save">Enregistrer</button>
+        <button
+          type="button"
+          (click)="annuler()"
+          class="admin-button cancel"
+        >
+          Annuler
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Section droite : Formulaire de changement de mot de passe -->
+  <div class="password-change-container">
+    <h2 class="admin-title">Changer le mot de passe</h2>
+    <div
+    *ngIf="message1"
+    class="alert"
+    [ngClass]="{
+      'alert-success': message.includes('succès'),
+      'alert-danger': message.includes('erreur')
+    }"
+  >
+    {{ message1 }}
+  </div>
+    <form class="password-form" (ngSubmit)="changerMotDePasse()">
+      <div class="password-detail-item">
+        <label for="ancien-mot-de-passe">Mot de passe actuel :</label>
+        <input
+          id="ancien-mot-de-passe"
+          [(ngModel)]="passwordForm.ancienMotDePasse"
+          name="oldPassword"
+          type="password"
+          required
+          class="admin-input"
+        />
+      </div>
+      <div class="password-detail-item">
+        <label for="nouveau-mot-de-passe">Nouveau mot de passe :</label>
+        <input
+          id="nouveau-mot-de-passe"
+          [(ngModel)]="passwordForm.nouveauMotDePasse"
+          name="newPassword"
+          type="password"
+          required
+          class="admin-input"
+        />
+      </div>
+      <div class="password-detail-item">
+        <label for="confirmer-nouveau-mot-de-passe">Confirmer le nouveau mot de passe :</label>
+        <input
+          id="confirmer-nouveau-mot-de-passe"
+          [(ngModel)]="passwordForm.confirmNewPassword"
+          name="confirmNewPassword"
+          type="password"
+          required
+          class="admin-input"
+        />
+      </div>
+
+      <!-- Bouton d'action -->
+      <div class="admin-buttons">
+        <button type="submit" class="admin-button save">Changer</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+

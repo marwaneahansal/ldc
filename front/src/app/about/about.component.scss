@@ -1,0 +1,82 @@
+/* Section About Us */
+.about-us-container {
+  border: 3px solid rgba(255, 255, 255, 0.5); /* Bordure transparente légèrement plus épaisse */
+  border-radius: 15px; /* Coins arrondis */
+  padding: 30px; /* Plus d'espace intérieur */
+  background: rgba(0, 0, 0, 0.1); /* Arrière-plan semi-transparent */
+  position: relative;
+  margin: 40px auto; /* Plus de marge autour */
+  max-width: 90%; /* Plus large sur l'écran */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Ombre plus marquée */
+  margin-top: 100px;
+}
+
+.about-us-title {
+  text-align: center;
+  font-size: 2.5em; /* Titre plus grand */
+  font-weight: bold;
+  margin-bottom: 30px; /* Plus d'espace sous le titre */
+  color: #333; /* Couleur du texte */
+}
+
+.about-us {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.description {
+  width: 55%; /* Ajuste la proportion pour mieux remplir le cadre */
+  font-size: 1.3em; /* Texte légèrement plus grand */
+  line-height: 1.8; /* Plus d'espacement entre les lignes */
+}
+
+.moving-image {
+  width: 40%; /* Image plus large */
+  position: relative;
+  overflow: hidden;
+}
+
+.moving-image img {
+  width: 100%;
+  height: auto;
+  position: relative;
+  animation: moveImage 5s infinite alternate ease-in-out;
+}
+
+/* Animation pour l'image */
+@keyframes moveImage {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(70px); /* Mouvement plus prononcé */
+  }
+}
+
+
+.location p {
+  margin: 5px 0;
+  font-size: 20px;
+  color: blue;
+}
+
+.location i {
+  color: #007bff;
+  margin-right: 25px;
+  font-size: 2.5em;
+}
+
+
+
+.working-hours p {
+  margin: 5px 0;
+  font-size: 20px;
+  color: blue;
+}
+
+.working-hours i {
+  color: #007bff;
+  margin-right: 8px;
+  font-size: 2.5em;
+}

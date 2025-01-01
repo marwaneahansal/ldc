@@ -1,0 +1,68 @@
+.footer-content {
+  display: flex; /* Aligner les éléments horizontalement */
+  align-items: center; /* Centrage vertical */
+  flex-wrap: wrap; /* Permet au contenu de se réorganiser si nécessaire */
+ 
+}
+
+.footer-logo {
+  height: 80px; /* Taille de l'image */
+  margin-right: 20px; /* Espacement entre l'image et la ligne */
+}
+.footer-description {
+  border-left: 2px solid #ffffff; /* Ligne verticale blanche */
+  padding-left: 20px; /* Espacement entre la ligne et le texte */
+  color: #ffffff; /* Couleur du texte blanche */
+  font-size: 14px;
+  max-width: 300px; /* Limite la largeur de la description */
+  word-wrap: break-word; /* Force les mots longs à revenir à la ligne */
+  line-height: 1.5; /* Espacement entre les lignes */
+}
+
+.footer-description p {
+  margin: 5px 0; /* Espacement entre les paragraphes */
+  text-align: justify; /* Justifie le texte */
+}
+
+.copy {
+  text-align: center;
+  position: relative;
+  top: 50px;
+  left: 155px;
+  font-size: 12px; /* Taille du texte pour "copyright" */
+  color: #ffffff; /* Couleur blanche */
+ 
+}
+
+
+footer {
+  background-color: #525db2; /* Couleur de fond sombre */
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  margin-top: 0px;
+}
+
+.footer-socials {
+  margin-bottom: 20px;
+  display: flex;
+
+}
+
+.footer-socials a {
+  margin: 0 10px ;
+  display:inline-block;
+  
+}
+
+.social-icon {
+  width: 30px;
+  height: 30px;
+  transition: transform 0.3s ease;
+}
+
+.social-icon:hover {
+  transform: scale(1.1);
+}
+
+

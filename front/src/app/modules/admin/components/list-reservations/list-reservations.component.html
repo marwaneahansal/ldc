@@ -1,0 +1,34 @@
+<div class="container">
+    <h2>Liste des Réservations</h2>
+  
+    <!-- Tableau affichant les réservations -->
+    <table class="reservations-table">
+      <thead>
+        <tr>
+          
+          <th>Client</th>
+          <th>Voiture</th>
+          <th>Date Début</th>
+          <th>Date Fin</th>
+          <th>Statut</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reservation of reservations">
+          
+          <td>{{ reservation.user.nom }} {{ reservation.user.prenom }}</td>
+          <td>{{ reservation.car.marque }} {{ reservation.car.modele }}</td>
+          <td>{{ reservation.date_debut | date: 'dd/MM/yyyy' }}</td>
+          <td>{{ reservation.date_fin | date: 'dd/MM/yyyy' }}</td>
+          <td>{{ reservation.statu }}</td>
+          <td>
+            <!-- Boutons pour modifier et supprimer -->
+            <button (click)="editReservation(reservation)" class="btn-edit">Modifier</button>
+            <button (click)="deleteReservation(reservation.id_reservation)" class="btn-delete">Supprimer</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

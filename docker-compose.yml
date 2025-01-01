@@ -1,0 +1,71 @@
+services:
+  mysqldb:
+    image: mysql:8.0
+    container_name: mysqldb
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: voiture_db
+      # MYSQL_USER: root
+      # MYSQL_PASSWORD: 1234
+    ports:
+      - "3306:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+    networks:
+      - ensa
+
+  adminer:
+    image: adminer
+    container_name: adminer
+    environment:
+      - ADMINER_DESIGN=dracula
+    ports:
+      - "8888:8080"
+    networks:
+      - ensa
+    restart: always
+    init: true
+
+  front:
+    build: 
+      context: ./front
+      dockerfile: Dockerfile
+    container_name: ensafront
+    ports:
+      - '4200:4200'
+    depends_on:
+      - mysqldb
+    restart: unless-stopped
+    volumes:
+      - ./front:/app/
+      - front_modules:/app/node_modules
+    networks:
+      - ensa
+
+  back:
+    build: 
+      context: ./back
+      dockerfile: Dockerfile
+    container_name: ensaback
+    ports:
+      - '8080:8080'
+    depends_on:
+      - mysqldb
+    restart: unless-stopped
+    volumes:
+      - ./back:/app/
+    networks:
+      - ensa
+
+volumes:
+  dbdata:
+  front_modules:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./front/node_modules
+
+networks:
+  ensa:

@@ -1,0 +1,57 @@
+<div class="container mt-5" >
+    <h2 class="text-center mb-4">Ajouter une Voiture</h2>
+    <form (ngSubmit)="onSubmit()" #carForm="ngForm" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="marque">Marque</label>
+        <input type="text" id="marque" class="form-control" name="marque" [(ngModel)]="car.marque" required />
+      </div>
+  
+      <div class="form-group">
+        <label for="modele">Modèle</label>
+        <input type="text" id="modele" class="form-control" name="modele" [(ngModel)]="car.modele" required />
+      </div>
+  
+      <div class="form-group">
+        <label for="annee">Année</label>
+        <input type="number" id="annee" class="form-control" name="annee" [(ngModel)]="car.annee" required />
+      </div>
+  
+      <div class="form-group">
+        <label for="type">Type</label>
+        <select id="type" class="form-control" name="type" [(ngModel)]="car.type" required>
+          <option value="SUV">SUV</option>
+          <option value="Berline">Berline</option>
+          <option value="Coupé">Coupé</option>
+          <option value="Hatchback">Hatchback</option>
+          <option value="Pickup">Pickup</option>
+        </select>
+      </div>
+  
+      <div class="form-group">
+        <label for="tarif">Tarif (MAD)</label>
+        <input type="number" id="tarif" class="form-control" name="tarif" [(ngModel)]="car.tarif" required />
+      </div>
+  
+      <div class="form-group">
+        <label for="etat">État</label>
+        <select id="etat" class="form-control" name="etat" [(ngModel)]="car.etat" required>
+          <option value="Disponible">Disponible</option>
+          <option value="Reserver">Réservé</option>
+        </select>
+      </div>
+  
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" class="form-control" name="description" [(ngModel)]="car.description" required></textarea>
+      </div>
+  
+      <div class="form-group">
+        <label for="file">Image</label>
+        <input type="file" id="file" class="form-control" (change)="onFileSelected($event)" required />
+      </div>
+  
+      <button type="submit"  class="btn btn-primary btn-block mt-3" [disabled]="!carForm.form.valid">Ajouter</button>
+    </form>
+</div>
+  
+  

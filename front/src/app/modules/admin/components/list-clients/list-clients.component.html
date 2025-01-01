@@ -1,0 +1,36 @@
+<!-- list-clients.component.html -->
+<div class="container">
+    <h2>Liste des Clients</h2>
+  
+    <!-- Bouton pour ajouter un nouveau client -->
+    <button (click)="openAddClientForm()" class="btn-add-client">Ajouter un Client</button>
+  
+    <!-- Tableau affichant les clients -->
+    <table class="clients-table">
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Email</th>
+          <th>Numéro de téléphone</th>
+          <th>Adresse</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let client of clients">
+          <td>{{ client.nom }}</td>
+          <td>{{ client.prenom }}</td>
+          <td>{{ client.email }}</td>
+          <td>{{ client.numero_tel }}</td>
+          <td>{{ client.adresse }}</td>
+          <td>
+            <!-- Boutons pour modifier et supprimer -->
+            <button (click)="editClient(client)" class="btn-edit">Modifier</button>
+            <button (click)="deleteClient(client.id)" class="btn-delete">Supprimer</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

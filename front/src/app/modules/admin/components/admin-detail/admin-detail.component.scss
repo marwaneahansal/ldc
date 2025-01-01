@@ -1,0 +1,115 @@
+.admin-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+}
+.admin-details-container {
+    width: 600px;
+    margin: 1px auto;
+    padding: 20px;
+    margin-left: 5px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  .password-change-container{
+    max-width: 500px;
+    margin: 1px auto;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  .admin-title {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  .admin-detail-item,.password-detail-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding: 8px 0;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .admin-detail-item label ,.password-detail-item label{
+    font-weight: bold;
+    color: #555;
+  }
+
+  .admin-detail-item span, .admin-input {
+    font-size: 16px;
+    color: #333;
+  }
+
+  .admin-input {
+    width: 60%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .admin-buttons {
+    text-align: right;
+    margin-top: 20px;
+  }
+
+  .admin-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  .admin-button.save {
+    background-color: #28a745;
+    color: #fff;
+  }
+
+  .admin-button.save:hover {
+    background-color: #218838;
+  }
+
+  .admin-button.cancel {
+    background-color: #dc3545;
+    color: #fff;
+    margin-left: 10px;
+  }
+
+  .admin-button.cancel:hover {
+    background-color: #c82333;
+  }
+
+  .admin-button.edit {
+    background-color: #007bff;
+    color: #fff;
+  }
+
+  .admin-button.edit:hover {
+    background-color: #0056b3;
+  }
+  
+  .alert {
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 5px;
+  }
+  
+  .alert-success {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  
+  .alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+  

@@ -1,0 +1,73 @@
+/* list-clients.component.css */
+.container {
+  margin: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  }
+  
+  h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .clients-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fff;
+  }
+  
+  .clients-table th, .clients-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .clients-table th {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+  }
+
+  /* Style des lignes du tableau */
+  .clients-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .clients-table tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+  }
+  
+  .btn-add-client, .btn-edit, .btn-delete {
+    padding: 8px 16px;
+    margin-right: 5px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .btn-add-client {
+    background-color: #4CAF50;
+    color: white;
+    margin-bottom: 10px;
+  }
+  
+  .btn-edit {
+    background-color: #ff9800;
+    color: white;
+  }
+  
+  .btn-delete {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .btn-add-client:hover, .btn-edit:hover, .btn-delete:hover {
+    opacity: 0.8;
+  }
+  

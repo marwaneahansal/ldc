@@ -1,0 +1,32 @@
+<div class="container">
+    <h2>Liste des Paiements</h2>
+  
+    <!-- Tableau affichant les paiements -->
+    <table class="payments-table">
+      <thead>
+        <tr>
+          <th>Client</th>
+          <th>Date Paiement</th>
+          <th>Montant (MAD)</th>
+          <th>Facture</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let paiement of paiements">
+          <td>{{ paiement.reservation.user.nom }} {{ paiement.reservation.user.prenom }}</td>
+          <td>{{ paiement.date_paiement | date: 'dd/MM/yyyy' }}</td>
+          <td>{{ paiement.montant | number: '1.2-2' }}</td>
+          <td>
+            <a (click)="downloadFacture(paiement.id_facture)" class="btn-download">Télécharger</a>
+          </td>
+          <td>
+            <!-- Boutons pour modifier et supprimer -->
+            <button (click)="editPayment(paiement)" class="btn-edit">Modifier</button>
+            <button (click)="deletePayment(paiement.id_facture)" class="btn-delete">Supprimer</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

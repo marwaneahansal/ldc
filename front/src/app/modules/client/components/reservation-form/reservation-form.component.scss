@@ -1,0 +1,115 @@
+div {
+    margin: 20px;
+    padding: 5px;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .reservation-container {
+    max-width: 1200px;
+    margin: 0 auto; /* Centrer sur la page */
+    margin-top: 80px;
+    margin-bottom: 40px;
+    padding: 20px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+  
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  
+  .car-detail {
+    flex: 1;
+    max-width: 45%;
+    text-align: left;
+  
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: #007bff;
+    }
+  
+    img {
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+      border-radius: 10px;
+      margin: 15px 0;
+    }
+  
+    p {
+      font-size: 1rem;
+      color: #555;
+  
+      strong {
+        color: #000;
+      }
+    }
+  }
+  
+  .reservation-form {
+    flex: 1;
+    max-width: 45%;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+  
+    .form-group {
+      margin-bottom: 20px;
+  
+      label {
+        display: block;
+        font-size: 1rem;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #333;
+      }
+  
+      input {
+        width: 100%;
+        padding: 10px;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+  
+      input:focus {
+        border-color: #007bff;
+        outline: none;
+      }
+    }
+  
+    .btn {
+      width: 100%;
+      padding: 10px;
+      font-size: 1.1rem;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  
+    .btn:hover {
+      background-color: #0056b3;
+    }
+  
+    .error-message {
+      color: red;
+      text-align: center;
+      margin-top: 10px;
+    }
+  }
+  

@@ -1,0 +1,46 @@
+<div class="reservation-container">
+    <h1>Réserver une voiture</h1>
+    <div class="container">
+      <!-- Section des détails de la voiture -->
+      <div *ngIf="car" class="car-detail">
+        <h2>{{ car.marque }} {{ car.modele }}</h2>
+        <img [src]="car.image" [alt]="car.marque + ' ' + car.modele" />
+        <p><strong>Type :</strong> {{ car.type }}</p>
+        <p><strong>Année :</strong> {{ car.annee }}</p>
+        <p><strong>Tarif :</strong> {{ car.tarif }} €/jour</p>
+      </div>
+  
+      <!-- Formulaire de réservation -->
+      <div class="reservation-form">
+        <form (ngSubmit)="submitReservation()">
+          <div class="form-group">
+            <label for="dateDebut">Date de début :</label>
+            <input
+              type="date"
+              id="date_debut"
+              [(ngModel)]="reservation.date_debut"
+              name="date_debut"
+              required
+            />
+          </div>
+  
+          <div class="form-group">
+            <label for="dateFin">Date de fin :</label>
+            <input
+              type="date"
+              id="date_fin"
+              [(ngModel)]="reservation.date_fin"
+              name="date_fin"
+              [min]="today"
+              required
+            />
+          </div>
+  
+          <button type="submit" class="btn">Réserver</button>
+        </form>
+        <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+      </div>
+    </div>
+  </div>
+  
+  

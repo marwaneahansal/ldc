@@ -1,0 +1,67 @@
+<div *ngIf="!showAddCarModal">
+  <div class="container">
+    <h2>Liste des Voitures</h2>
+
+    <!-- Bouton pour ouvrir la modale -->
+    <button class="btn btn-primary btn-add-car" (click)="openModal()">Ajouter une voiture</button>
+
+    <!-- Tableau affichant les voitures -->
+    <table class="cars-table">
+      <thead>
+        <tr>
+          <th>Marque</th>
+          <th>Modèle</th>
+          <th>Année</th>
+          <th>Type</th>
+          <th>Tarif (MAD)</th>
+          <th>État</th>
+          <th>Image</th>
+          <th>Description</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let voiture of voitures">
+          <td>{{ voiture.marque }}</td>
+          <td>{{ voiture.modele }}</td>
+          <td>{{ voiture.annee }}</td>
+          <td>{{ voiture.type }}</td>
+          <td>{{ voiture.tarif }}</td>
+          <td>{{ voiture.etat }}</td>
+          <td>
+            <img [src]="voiture.image" alt="Image de {{ voiture.marque }}" class="car-image" />
+          </td>
+          <td>{{ voiture.description }}</td>
+          <td>
+            <!-- Boutons pour modifier et supprimer -->
+            <button class="btn-edit">Modifier</button>
+            <button (click)="deleteCar(voiture.id)" class="btn-delete">Supprimer</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modale Bootstrap -->
+<div
+  class="modal fade"
+  id="addCarModal"
+  tabindex="-1"
+  aria-labelledby="addCarModalLabel"
+  aria-hidden="true"
+  [ngClass]="{ 'show d-block': showAddCarModal }"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" (click)="closeModal()" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <app-add-car></app-add-car> <!-- Chargement du formulaire d'ajout -->
+      </div>
+    </div>
+  </div>
+</div>
+
+  

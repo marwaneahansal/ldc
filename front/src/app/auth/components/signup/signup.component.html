@@ -1,0 +1,118 @@
+<div class="signup-container">
+  <div class="signup-card">
+    <div class="form-header">
+      <h2>Inscription</h2>
+    <p>Créez un compte pour commencer</p>
+    </div>
+    
+
+    <form (ngSubmit)="onSubmit()" #signupForm="ngForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="firstName">Nom</label>
+          <input
+            id="firstName"
+            type="text"
+            placeholder="Entrez votre nom"
+            [(ngModel)]="user.nom"
+            name="firstName"
+            required
+            #firstNameInput="ngModel"
+          />
+          <div *ngIf="firstNameInput.invalid && firstNameInput.touched" class="error">
+            Nom requis
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="lastName">Prénom</label>
+          <input
+            id="lastName"
+            type="text"
+            placeholder="Entrez votre prénom"
+            [(ngModel)]="user.prenom"
+            name="lastName"
+            required
+            #lastNameInput="ngModel"
+          />
+          <div *ngIf="lastNameInput.invalid && lastNameInput.touched" class="error">
+            Prénom requis
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            id="email"
+            type="email"
+            placeholder="Entrez votre email"
+            [(ngModel)]="user.email"
+            name="email"
+            required
+            #emailInput="ngModel"
+          />
+          <div *ngIf="emailInput.invalid && emailInput.touched" class="error">
+            Email invalide
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Mot de passe</label>
+          <input
+            id="password"
+            type="password"
+            placeholder="Entrez votre mot de passe"
+            [(ngModel)]="user.password"
+            name="password"
+            required
+            minlength="6"
+            #passwordInput="ngModel"
+          />
+          <div *ngIf="passwordInput.invalid && passwordInput.touched" class="error">
+            Mot de passe (min. 6 caractères)
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="address">Adresse</label>
+          <textarea
+            id="address"
+            placeholder="Entrez votre adresse"
+            [(ngModel)]="user.adresse"
+            name="address"
+            required
+            #addressInput="ngModel"
+          ></textarea>
+          <div *ngIf="addressInput.invalid && addressInput.touched" class="error">
+            Adresse requise
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Téléphone</label>
+          <input
+            id="phone"
+            type="tel"
+            placeholder="Entrez votre numéro de téléphone"
+            [(ngModel)]="user.numero_tel"
+            name="phone"
+            required
+            pattern="[0-9]{10}"
+            #phoneInput="ngModel"
+          />
+          <div *ngIf="phoneInput.invalid && phoneInput.touched" class="error">
+            Numéro de téléphone invalide (10 chiffres)
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary" [disabled]="signupForm.invalid">
+        S'inscrire
+      </button>
+    </form>
+  </div>
+</div>

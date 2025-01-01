@@ -1,0 +1,41 @@
+<div class="confirmation-container">
+  <h1>Confirmation de Réservation</h1>
+  <p>
+    Merci de confirmer votre réservation en acceptant nos 
+    <a [routerLink]="'/conditions'" target="_blank" class="link">Conditions Générales</a>.
+  </p>
+  <p>
+    Une fois que vous confirmez, un contrat sera généré et envoyé à votre adresse email.
+    Vous devez effectuer le paiement dans les <strong>48 heures</strong>, sinon le contrat sera rejeté
+    et votre réservation sera annulée.
+  </p>
+
+  <form (ngSubmit)="confirmReservation()">
+    <div class="form-group">
+      <input
+        type="checkbox"
+        id="acceptConditions"
+        [(ngModel)]="hasAcceptedConditions"
+        name="acceptConditions"
+        required
+      />
+      <label for="acceptConditions">J'accepte les conditions générales</label>
+    </div>
+
+    <!-- Champ pour la signature -->
+    <div class="signature-container">
+      <label for="signature">Signature numérique</label>
+      <canvas id="signatureCanvas" width="400" height="200" style="border: 1px solid #000;"></canvas>
+      <button type="button" (click)="clearSignature()">Effacer la signature</button>
+      <input type="file" (change)="uploadSignature($event)" accept="image/*" />
+    </div>
+
+    <button type="submit" class="btn" [disabled]="!hasAcceptedConditions || !signatureData">
+      Confirmer
+    </button>
+  </form>
+
+  <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+</div>
+
+  
