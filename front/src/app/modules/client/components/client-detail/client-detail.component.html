@@ -6,8 +6,8 @@
         *ngIf="message"
         class="alert"
         [ngClass]="{
-          'alert-success': message.includes('succès'),
-          'alert-danger': message.includes('erreur')
+          'alert-success': !isError,
+          'alert-danger': isError
         }"
       >
         {{ message }}
@@ -88,8 +88,8 @@
       *ngIf="message1"
       class="alert"
       [ngClass]="{
-        'alert-success': message.includes('succès'),
-        'alert-danger': message.includes('erreur')
+        'alert-success': !isPasswordError,
+        'alert-danger': isPasswordError
       }"
     >
       {{ message1 }}

@@ -25,10 +25,8 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
 public class UserController {
-	@Autowired
-    private  UserService userService;
-
-
+    @Autowired
+    private UserService userService;
 
     @PutMapping("/modifier/{id}")
     public ResponseEntity<UserDto> updateUser(@PathVariable Long id, @RequestBody UserRequest userRequest) {
@@ -53,16 +51,19 @@ public class UserController {
         UserDto updatedUser = userService.modifierMotDePasse(id, nouveauMotDePasse);
         return ResponseEntity.ok(updatedUser);
     }
+
     @GetMapping("/count")
     public long getNombreClients() {
         return userService.getNombreUtilisateurs();
     }
+
     @PutMapping("/utilisateur/{userId}/changer-mot-de-passe")
     public ResponseEntity<UserDto> changerMotDePasse(
             @PathVariable Long userId,
             @RequestParam String ancienMotDePasse,
             @RequestParam String nouveauMotDePasse) {
-        UserDto utilisateurMisAJour = userService.modifierMotDePasseAvecVerification(userId, ancienMotDePasse, nouveauMotDePasse);
+        UserDto utilisateurMisAJour = userService.modifierMotDePasseAvecVerification(userId, ancienMotDePasse,
+                nouveauMotDePasse);
         return ResponseEntity.ok(utilisateurMisAJour);
     }
 }

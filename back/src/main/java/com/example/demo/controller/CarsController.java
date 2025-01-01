@@ -29,16 +29,18 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/api/cars")
 @RequiredArgsConstructor
 public class CarsController {
-	@Autowired
-	private CarsService carsService;
-	
-	
-	@PostMapping("/creer")
-	/* public ResponseEntity<CarsDto> createCar(@RequestBody CarsRequest carsRequest) {
-        CarsDto createdCar = carsService.creerCars(carsRequest);
-        return ResponseEntity.ok(createdCar);
-    }*/
-	public ResponseEntity<CarsDto> createCar(
+    @Autowired
+    private CarsService carsService;
+
+    @PostMapping("/creer")
+    /*
+     * public ResponseEntity<CarsDto> createCar(@RequestBody CarsRequest
+     * carsRequest) {
+     * CarsDto createdCar = carsService.creerCars(carsRequest);
+     * return ResponseEntity.ok(createdCar);
+     * }
+     */
+    public ResponseEntity<CarsDto> createCar(
             @RequestParam("file") MultipartFile file,
             @RequestParam("marque") String marque,
             @RequestParam("modele") int modele,
@@ -50,7 +52,7 @@ public class CarsController {
 
         try {
             // Sauvegarde de l'image dans le dossier "assets"
-            String uploadDir = "C:\\Users\\21265\\Documents\\workspace-spring-tool-suite-4-4.26.0.RELEASE\\voiture_location_angular\\src\\assets\\";
+            String uploadDir = System.getProperty("user.dir") + "/src/main/resources/static/assets/";
             File directory = new File(uploadDir);
             if (!directory.exists()) {
                 directory.mkdirs();
@@ -78,8 +80,8 @@ public class CarsController {
             return ResponseEntity.status(500).build();
         }
     }
-	
-	// Modifier une voiture existante
+
+    // Modifier une voiture existante
     @PutMapping("/modifier/{id}")
     public ResponseEntity<CarsDto> updateCar(@PathVariable Long id, @RequestBody CarsRequest carsRequest) {
         CarsDto updatedCar = carsService.modifierCars(id, carsRequest);
@@ -99,6 +101,7 @@ public class CarsController {
         List<CarsDto> carsList = carsService.getTousCars();
         return ResponseEntity.ok(carsList);
     }
+
     @GetMapping("detail/{id}")
     public CarsDto getCarById(@PathVariable Long id) {
         return carsService.getCarsById(id);

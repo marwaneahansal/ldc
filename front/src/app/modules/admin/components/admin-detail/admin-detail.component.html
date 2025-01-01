@@ -3,12 +3,12 @@
   <div class="admin-details-container">
     <h2 class="admin-title">Détails de l'administrateur</h2>
     <div
+    [ngClass]="{
+      'alert-success': !isError,
+      'alert-danger': isError
+    }"
       *ngIf="message"
       class="alert"
-      [ngClass]="{
-        'alert-success': message.includes('succès'),
-        'alert-danger': message.includes('erreur')
-      }"
     >
       {{ message }}
     </div>
@@ -88,8 +88,8 @@
     *ngIf="message1"
     class="alert"
     [ngClass]="{
-      'alert-success': message.includes('succès'),
-      'alert-danger': message.includes('erreur')
+      'alert-success': !isPasswordError,
+      'alert-danger': isPasswordError
     }"
   >
     {{ message1 }}

@@ -85,7 +85,7 @@ private Long id;
 	}
 	
 	public String getImage() {
-		return image;
+		return "http://localhost:8080/" + image;
 	}
 
 	public void setImage(String image) {

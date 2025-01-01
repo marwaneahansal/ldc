@@ -51,7 +51,7 @@ public class SecurityConfig {
 	                .requestMatchers("/api/factures/**").permitAll()
 	                .requestMatchers("/api/contrats/**").permitAll()
 	                .requestMatchers("/api/retours/**").permitAll()
-	                
+	                .requestMatchers("/assets/**").permitAll()
 	                .anyRequest().authenticated()               // Toutes les autres requêtes nécessitent une authentification
 	               
 	            );

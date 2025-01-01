@@ -17,23 +17,23 @@ import com.example.demo.repository.UserRespository;
 
 import lombok.RequiredArgsConstructor;
 
-
 import org.springframework.security.crypto.password.PasswordEncoder;
+
 @Service
 @RequiredArgsConstructor
-public class AuthServiceImpl implements AuthService{
+public class AuthServiceImpl implements AuthService {
 	@Autowired
-	private  UserRespository userReepository;
+	private UserRespository userReepository;
 	@Autowired
-    private PasswordEncoder passwordEncoder;
+	private PasswordEncoder passwordEncoder;
 	@Autowired
 	private AdminRepository adminReepository;
-    @Autowired
-    private PersonneRepository personneRepository;
+	@Autowired
+	private PersonneRepository personneRepository;
 
 	@Override
 	public UserDto createCustomer(SignupRequest signupRequest) {
-		User user=new User();
+		User user = new User();
 		user.setNom(signupRequest.getNom());
 		user.setPrenom(signupRequest.getPrenom());
 		user.setEmail(signupRequest.getEmail());
@@ -41,39 +41,39 @@ public class AuthServiceImpl implements AuthService{
 		user.setAdresse(signupRequest.getAdresse());
 		user.setNumero_tel(signupRequest.getNumero_tel());
 		User creerUser = userReepository.save(user);
-		UserDto userDto=new UserDto();
+		UserDto userDto = new UserDto();
 		userDto.setId(creerUser.getId());
 		return userDto;
 	}
 
 	@Override
 	public boolean hasCustomerWithEmail(String email) {
-		
+
 		return userReepository.findFirstByEmail(email).isPresent();
 	}
 
 	@Override
 	public UserDto loginCustomer(LoginRequest loginRequest) {
 		User user = userReepository.findFirstByEmail(loginRequest.getEmail())
-	            .orElseThrow(() -> new IllegalArgumentException("Invalid email or password"));
+				.orElseThrow(() -> new IllegalArgumentException("Invalid email or password"));
 
-	        if (!passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
-	            throw new IllegalArgumentException("Invalid email or password");
-	        }
+		if (!passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
+			throw new IllegalArgumentException("Invalid email or password");
+		}
 
-	        UserDto userDto = new UserDto();
-	        userDto.setId(user.getId());
-	        userDto.setEmail(user.getEmail());
-	        userDto.setNom(user.getNom());
-	        userDto.setPrenom(user.getPrenom());
-	        userDto.setNumero_tel(user.getNumero_tel());
-	        userDto.setAdresse(user.getAdresse());
-	        return userDto;
+		UserDto userDto = new UserDto();
+		userDto.setId(user.getId());
+		userDto.setEmail(user.getEmail());
+		userDto.setNom(user.getNom());
+		userDto.setPrenom(user.getPrenom());
+		userDto.setNumero_tel(user.getNumero_tel());
+		userDto.setAdresse(user.getAdresse());
+		return userDto;
 	}
 
 	@Override
 	public AdminDto createAdmin(SignupRequest signupRequest) {
-		Admin user=new Admin();
+		Admin user = new Admin();
 		user.setNom(signupRequest.getNom());
 		user.setPrenom(signupRequest.getPrenom());
 		user.setEmail(signupRequest.getEmail());
@@ -81,38 +81,33 @@ public class AuthServiceImpl implements AuthService{
 		user.setAdresse(signupRequest.getAdresse());
 		user.setNumero_tel(signupRequest.getNumero_tel());
 		Admin creerUser = adminReepository.save(user);
-		AdminDto userDto=new AdminDto();
+		AdminDto userDto = new AdminDto();
 		userDto.setId(creerUser.getId());
 		return userDto;
 	}
 
 	@Override
 	public UserDto login(LoginRequest loginRequest) {
-	    Personne personne = personneRepository.findByEmail(loginRequest.getEmail())
-	    		 .orElseThrow(() -> new IllegalArgumentException("Invalid email or password"));
+		Personne personne = personneRepository.findByEmail(loginRequest.getEmail())
+				.orElseThrow(() -> new IllegalArgumentException("Invalid email or password"));
 
-        if (!passwordEncoder.matches(loginRequest.getPassword(), personne.getPassword())) {
-            throw new IllegalArgumentException("Invalid email or password");
-        }
+		if (!passwordEncoder.matches(loginRequest.getPassword(), personne.getPassword())) {
+			throw new IllegalArgumentException("Invalid email or password");
+		}
 
-	    // Construire et retourner le DTO en fonction du type de Personne
-	    String role = (personne instanceof Admin) ? "Admin" : "Client";
-	    
-	    
-	    UserDto userDto = new UserDto();
-        userDto.setId(personne.getId());
-        userDto.setEmail(personne.getEmail());
-        userDto.setNom(personne.getNom());
-        userDto.setPrenom(personne.getPrenom());
-        userDto.setNumero_tel(personne.getNumero_tel());
-        userDto.setAdresse(personne.getAdresse());
-        userDto.setRole(role);
-        userDto.setPassword(personne.getPassword());
-        return userDto;
+		// Construire et retourner le DTO en fonction du type de Personne
+		String role = (personne instanceof Admin) ? "Admin" : "Client";
+
+		UserDto userDto = new UserDto();
+		userDto.setId(personne.getId());
+		userDto.setEmail(personne.getEmail());
+		userDto.setNom(personne.getNom());
+		userDto.setPrenom(personne.getPrenom());
+		userDto.setNumero_tel(personne.getNumero_tel());
+		userDto.setAdresse(personne.getAdresse());
+		userDto.setRole(role);
+		userDto.setPassword(personne.getPassword());
+		return userDto;
 	}
 
-	
-	
-	
 }
-

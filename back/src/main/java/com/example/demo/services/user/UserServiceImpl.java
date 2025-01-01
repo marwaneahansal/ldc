@@ -23,6 +23,7 @@ public class UserServiceImpl implements UserService {
     private  UserRespository userRepository;
 	@Autowired
     private PasswordEncoder passwordEncoder;
+    
     @Override
     public UserDto creerUtilisateur(UserRequest userRequest) {
         User user = new User();
