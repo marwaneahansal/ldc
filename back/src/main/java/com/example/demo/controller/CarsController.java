@@ -131,8 +131,15 @@ public class CarsController {
 
     // Afficher toutes les voitures
     @GetMapping("/tous")
-    public ResponseEntity<List<CarsDto>> getAllCars() {
-        List<CarsDto> carsList = carsService.getTousCars();
+    public ResponseEntity<List<CarsDto>> getAllCars(
+        @RequestParam(required = false) String date,
+        @RequestParam(required = false) String type,
+        @RequestParam(required = false) String etat,
+        @RequestParam(required = false) String marque,
+        @RequestParam(required = false) String tarif
+    ) {
+        // print all the query params
+        List<CarsDto> carsList = carsService.getTousCars(date, type, etat, marque, tarif);
         return ResponseEntity.ok(carsList);
     }
 

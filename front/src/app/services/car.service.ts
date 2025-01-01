@@ -30,7 +30,7 @@ export class CarService {
 
   // Rechercher des voitures
   searchCars(filters: any): Observable<Car[]> {
-    return this.http.get<Car[]>(`${this.apiUrl}/search`, { params: filters });
+    return this.http.get<Car[]>(`${this.apiUrl}`, { params: filters });
   }
 
   getCarById(id: number): Observable<Car> {

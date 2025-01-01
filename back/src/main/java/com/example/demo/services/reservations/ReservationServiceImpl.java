@@ -1,6 +1,5 @@
 package com.example.demo.services.reservations;
 
-
 import lombok.RequiredArgsConstructor;
 
 import org.slf4j.Logger;
@@ -32,170 +31,168 @@ import java.util.stream.Collectors;
 public class ReservationServiceImpl implements ReservationService {
 	private static final Logger logger = LoggerFactory.getLogger(ReservationServiceImpl.class);
 	@Autowired
-    private  ReservationRepository reservationRepository;
+	private ReservationRepository reservationRepository;
 	@Autowired
-	private  CarsRespository carsRepository;
+	private CarsRespository carsRepository;
 	@Autowired
-	private  UserRespository userRepository;
+	private UserRespository userRepository;
 	@Autowired
-	private  ContratRepository contratRepository;
+	private ContratRepository contratRepository;
 
-    @Override
-    public ReservationDto creerReservation(ReservationRequest reservationRequest) {
-        // Vérifiez si la voiture et l'utilisateur existent
-        Car car = carsRepository.findById((long) reservationRequest.getCarId())
-                .orElseThrow(() -> new RuntimeException("Voiture introuvable avec l'ID " + reservationRequest.getCarId()));
-        User user = userRepository.findById((long) reservationRequest.getUserId())
-                .orElseThrow(() -> new RuntimeException("Utilisateur introuvable avec l'ID " + reservationRequest.getUserId()));
+	@Override
+	public ReservationDto creerReservation(ReservationRequest reservationRequest) {
+		// Vérifiez si la voiture et l'utilisateur existent
+		Car car = carsRepository.findById((long) reservationRequest.getCarId())
+				.orElseThrow(() -> new RuntimeException("Voiture introuvable avec l'ID " + reservationRequest.getCarId()));
+		User user = userRepository.findById((long) reservationRequest.getUserId())
+				.orElseThrow(() -> new RuntimeException("Utilisateur introuvable avec l'ID " + reservationRequest.getUserId()));
 
-        Reservation reservation = new Reservation();
-        reservation.setDate_debut(reservationRequest.getDate_debut());
-        reservation.setDate_fin(reservationRequest.getDate_fin());
-        reservation.setStatu("En attente");
-        reservation.setCar(car);
-        reservation.setDate_de_reservation(LocalDate.now());;
-        reservation.setUser(user);
+		Reservation reservation = new Reservation();
+		reservation.setDate_debut(reservationRequest.getDate_debut());
+		reservation.setDate_fin(reservationRequest.getDate_fin());
+		reservation.setStatu("En attente");
+		reservation.setCar(car);
+		reservation.setDate_de_reservation(LocalDate.now());
+		;
+		reservation.setUser(user);
 
-        Reservation reservationCree = reservationRepository.save(reservation);
+		Reservation reservationCree = reservationRepository.save(reservation);
 
-        return convertirEnDto(reservationCree);
-    }
+		return convertirEnDto(reservationCree);
+	}
 
-    @Override
-    public ReservationDto modifierReservation(int id, ReservationRequest reservationRequest) {
-        Reservation reservationExistante = reservationRepository.findById((long) id)
-                .orElseThrow(() -> new RuntimeException("Réservation introuvable avec l'ID " + id));
+	@Override
+	public ReservationDto modifierReservation(int id, ReservationRequest reservationRequest) {
+		Reservation reservationExistante = reservationRepository.findById((long) id)
+				.orElseThrow(() -> new RuntimeException("Réservation introuvable avec l'ID " + id));
 
-       
+		reservationExistante.setDate_debut(reservationRequest.getDate_debut());
+		reservationExistante.setDate_fin(reservationRequest.getDate_fin());
 
-        reservationExistante.setDate_debut(reservationRequest.getDate_debut());
-        reservationExistante.setDate_fin(reservationRequest.getDate_fin());
-       
-       
+		Reservation reservationModifiee = reservationRepository.save(reservationExistante);
 
-        Reservation reservationModifiee = reservationRepository.save(reservationExistante);
+		return convertirEnDto(reservationModifiee);
+	}
 
-        return convertirEnDto(reservationModifiee);
-    }
+	@Override
+	public void supprimerReservation(int id) {
+		reservationRepository.deleteById((long) id);
+	}
 
-    @Override
-    public void supprimerReservation(int id) {
-        reservationRepository.deleteById((long) id);
-    }
+	@Override
+	public List<ReservationDto> getToutesLesReservations() {
+		return reservationRepository.findAll().stream()
+				.map(this::convertirEnDto)
+				.collect(Collectors.toList());
+	}
 
-    @Override
-    public List<ReservationDto> getToutesLesReservations() {
-        return reservationRepository.findAll().stream()
-                .map(this::convertirEnDto)
-                .collect(Collectors.toList());
-    }
+	@Override
+	public ReservationDto getReservationById(int id) {
+		Reservation reservation = reservationRepository.findById((long) id)
+				.orElseThrow(() -> new RuntimeException("Réservation introuvable avec l'ID " + id));
+		return convertirEnDto(reservation);
+	}
 
-    @Override
-    public ReservationDto getReservationById(int id) {
-        Reservation reservation = reservationRepository.findById((long) id)
-                .orElseThrow(() -> new RuntimeException("Réservation introuvable avec l'ID " + id));
-        return convertirEnDto(reservation);
-    }
-
-    private ReservationDto convertirEnDto(Reservation reservation) {
-        ReservationDto reservationDto = new ReservationDto();
-        reservationDto.setId_reservation(reservation.getId_resrvation());
-        reservationDto.setDate_debut(reservation.getDate_debut());
-        reservationDto.setDate_fin(reservation.getDate_fin());
-        reservationDto.setStatu(reservation.getStatu());
-        reservationDto.setCar(reservation.getCar());
-        reservationDto.setUser(reservation.getUser());
-        return reservationDto;
-    }
+	private ReservationDto convertirEnDto(Reservation reservation) {
+		ReservationDto reservationDto = new ReservationDto();
+		reservationDto.setId_reservation(reservation.getId_resrvation());
+		reservationDto.setDate_debut(reservation.getDate_debut());
+		reservationDto.setDate_fin(reservation.getDate_fin());
+		reservationDto.setStatu(reservation.getStatu());
+		reservationDto.setCar(reservation.getCar());
+		reservationDto.setUser(reservation.getUser());
+		return reservationDto;
+	}
 
 	@Override
 	public long getNombreResrvation() {
-		
+
 		return reservationRepository.count();
 	}
 
 	@Override
 	public ReservationDto confirmerReservation(int id) {
-		 Reservation reservationExistante = reservationRepository.findById((long) id)
-	                .orElseThrow(() -> new RuntimeException("Réservation introuvable avec l'ID " + id));
+		Reservation reservationExistante = reservationRepository.findById((long) id)
+				.orElseThrow(() -> new RuntimeException("Réservation introuvable avec l'ID " + id));
 
-	       
+		reservationExistante.setStatu("En attente de paiement");
 
-	        reservationExistante.setStatu("En attente de paiement");
-	       
-	       
+		Reservation reservationModifiee = reservationRepository.save(reservationExistante);
 
-	        Reservation reservationModifiee = reservationRepository.save(reservationExistante);
-
-	        return convertirEnDto(reservationModifiee);
+		return convertirEnDto(reservationModifiee);
 	}
 
 	@Override
 	public Double montontTotal(Long id) {
-		 Reservation reservation = reservationRepository.findById((long) id)
-	                .orElseThrow(() -> new RuntimeException("Réservation introuvable avec l'ID " + id));
-		 long daysBetween = ChronoUnit.DAYS.between(reservation.getDate_debut().toInstant(), reservation.getDate_fin().toInstant());
-	     Double montontTotalDouble=   daysBetween * reservation.getCar().getTarif();
+		Reservation reservation = reservationRepository.findById((long) id)
+				.orElseThrow(() -> new RuntimeException("Réservation introuvable avec l'ID " + id));
+		long daysBetween = ChronoUnit.DAYS.between(reservation.getDate_debut().toInstant(),
+				reservation.getDate_fin().toInstant());
+		Double montontTotalDouble = daysBetween * reservation.getCar().getTarif();
 		return montontTotalDouble;
 	}
 
 	@Override
 	public long getNombreResrvationDuClient(Long id) {
-		 return reservationRepository.countByClientId(id);
+		return reservationRepository.countByClientId(id);
 	}
 
 	@Override
-	public long getNombreResrvationDuClientAndStatu(Long id,String statu) {
-		
+	public long getNombreResrvationDuClientAndStatu(Long id, String statu) {
+
 		return reservationRepository.countByClientIdAndStatu(id, statu);
 	}
 
 	@Override
-	@Scheduled(cron = "0 0 0 * * ?") 
+	@Scheduled(cron = "0 0 0 * * ?")
 	public void mettreAJourStatutReservations() {
 		logger.info("Mise à jour des statuts des réservations démarrée.");
 		List<Reservation> reservations = reservationRepository.findAll();
 
-	    for (Reservation reservation : reservations) {
-	    	 LocalDate dateDeDebut = convertirDateEnLocalDate(reservation.getDate_debut());
-	         LocalDate dateDeFin = convertirDateEnLocalDate(reservation.getDate_fin());
-	        // Vérifie si le statut est "En attente" ou "En attente de paiement" et que la date de réservation dépasse 2 jours
-	        if (reservation.getStatu().equalsIgnoreCase("En attente") && reservation.getDate_de_reservation().isBefore(LocalDate.now().minusDays(2)) ){
+		for (Reservation reservation : reservations) {
+			LocalDate dateDeDebut = convertirDateEnLocalDate(reservation.getDate_debut());
+			LocalDate dateDeFin = convertirDateEnLocalDate(reservation.getDate_fin());
+			// Vérifie si le statut est "En attente" ou "En attente de paiement" et que la
+			// date de réservation dépasse 2 jours
+			if (reservation.getStatu().equalsIgnoreCase("En attente")
+					&& reservation.getDate_de_reservation().isBefore(LocalDate.now().minusDays(2))) {
 
-	            reservation.setStatu("Annule");
-	            Car car= reservation.getCar();
-		           car.setEtat("Disponible");
-		           this.carsRepository.save(car); // Remettre la voiture en état disponible si nécessaire
+				reservation.setStatu("Annule");
+				Car car = reservation.getCar();
+				car.setEtat("Disponible");
+				this.carsRepository.save(car); // Remettre la voiture en état disponible si nécessaire
 
-	        } else if (reservation.getStatu().equalsIgnoreCase("En attente de paiement") && reservation.getDate_de_reservation().isBefore(LocalDate.now().minusDays(2))) {
-	        	reservation.setStatu("Annulee");
-	           Car car= reservation.getCar();
-	           car.setEtat("Disponible");
-	           this.carsRepository.save(car);
-	            Contrat contrat=  this.contratRepository.contratByreservationId(reservation.getId_resrvation());
-	            contrat.setEtat("Annulee");
-	            this.contratRepository.save(contrat);
+			} else if (reservation.getStatu().equalsIgnoreCase("En attente de paiement")
+					&& reservation.getDate_de_reservation().isBefore(LocalDate.now().minusDays(2))) {
+				reservation.setStatu("Annulee");
+				Car car = reservation.getCar();
+				car.setEtat("Disponible");
+				this.carsRepository.save(car);
+				Contrat contrat = this.contratRepository.contratByreservationId(reservation.getId_resrvation());
+				contrat.setEtat("Annulee");
+				this.contratRepository.save(contrat);
 			}
-	        // Vérifie si le statut est "Confirmé" et que la date actuelle est entre date début et date fin
-	        else if (reservation.getStatu().equalsIgnoreCase("Confirme") 
-	                && !LocalDate.now().isBefore(dateDeDebut) 
-	                && !LocalDate.now().isAfter(dateDeFin)){
+			// Vérifie si le statut est "Confirmé" et que la date actuelle est entre date
+			// début et date fin
+			else if (reservation.getStatu().equalsIgnoreCase("Confirme")
+					&& !LocalDate.now().isBefore(dateDeDebut)
+					&& !LocalDate.now().isAfter(dateDeFin)) {
 
-	            reservation.setStatu("En cours");
-	            Car car= reservation.getCar();
-		           car.setEtat("Reserve");
-		           this.carsRepository.save(car); // Mettre à jour l'état de la voiture
-	        }
+				reservation.setStatu("En cours");
+				Car car = reservation.getCar();
+				car.setEtat("Reserve");
+				this.carsRepository.save(car); // Mettre à jour l'état de la voiture
+			}
 
-	        // Sauvegarde les modifications
-	        reservationRepository.save(reservation);
-	    }
-	    logger.info("Mise à jour des statuts des réservations terminée.");
+			// Sauvegarde les modifications
+			reservationRepository.save(reservation);
+		}
+		logger.info("Mise à jour des statuts des réservations terminée.");
 	}
 
 	private LocalDate convertirDateEnLocalDate(Date date) {
-	    return date.toInstant()
-	               .atZone(ZoneId.systemDefault())
-	               .toLocalDate();
+		return date.toInstant()
+				.atZone(ZoneId.systemDefault())
+				.toLocalDate();
 	}
 }

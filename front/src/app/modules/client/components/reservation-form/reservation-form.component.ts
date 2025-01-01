@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../../auth/services/auth/auth.service';
-import {  ClientService } from '../../service/client.service';
+import { ClientService } from '../../service/client.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CarService, Car } from '../../../../services/car.service';
 @Component({
   selector: 'app-reservation-form',
-   standalone: true,
-    imports: [CommonModule,FormsModule],
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './reservation-form.component.html',
   styleUrls: ['./reservation-form.component.scss'],
 })
 export class ReservationFormComponent implements OnInit {
-   car: Car | null = null;
+  car: Car | null = null;
   carId: number | null = null; // ID de la voiture
   userId: number | null = null; // ID de l'utilisateur
   reservation = {
@@ -37,13 +37,13 @@ export class ReservationFormComponent implements OnInit {
     this.carService1.getCarById(carId).subscribe((data) => {
       this.car = data;
     });
-   
+
     // Récupérer l'utilisateur connecté
     const user = this.authService.getUserInfo();
     if (user) {
       this.userId = user.id;
     } else {
-      this.errorMessage = "Vous devez être connecté pour réserver.";
+      this.errorMessage = 'Vous devez être connecté pour réserver.';
     }
   }
 
@@ -51,22 +51,22 @@ export class ReservationFormComponent implements OnInit {
   submitReservation(): void {
     if (this.isStartDateValid()) {
       if (!this.carId || !this.userId) {
-        this.errorMessage = "Informations utilisateur ou voiture manquantes.";
+        this.errorMessage = 'Informations utilisateur ou voiture manquantes.';
         return;
       }
-    
+
       const reservationData = {
         carId: this.carId,
         userId: this.userId,
         date_debut: this.reservation.date_debut,
         date_fin: this.reservation.date_fin,
       };
-  
+
       this.carService.reserveCar(reservationData).subscribe({
         next: (response) => {
           console.log(response);
-          alert('Réservation réussie !');
-          this.router.navigate(['/confirmer',response.id_reservation]); // Redirection après succès
+          alert('Réservation réussie! Veillerz attendre la confirmation.');
+          // this.router.navigate(['/confirmer', response.id_reservation]); // Redirection après succès
         },
         error: (error) => {
           console.error('Erreur lors de la réservation :', error);
@@ -74,11 +74,11 @@ export class ReservationFormComponent implements OnInit {
         },
       });
     } else {
-      alert('La date de début ne peut pas être avant aujourd\'hui.');
+      alert("Veuillez vérifier les dates de réservation.");
     }
-   
   }
+
   isStartDateValid(): boolean {
-    return this.reservation.date_debut >= this.today;
+    return this.reservation.date_debut >= this.today && this.reservation.date_fin >= this.reservation.date_debut;
   }
 }

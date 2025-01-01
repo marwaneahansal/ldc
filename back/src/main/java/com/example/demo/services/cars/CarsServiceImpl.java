@@ -60,9 +60,30 @@ public class CarsServiceImpl implements CarsService {
 	}
 
 	@Override
-	public List<CarsDto> getTousCars() {
-		return carsRepository.findAll().stream().map(car -> {
+	public List<CarsDto> getTousCars(String date, String type, String etat, String marque, String tarif) {
+		List<Car> cars = carsRepository.findAll();
 
+		// TODO: filter cars also by date
+
+		if (type != null && type != "") {
+			cars = cars.stream().filter(car -> car.getType().equals(type)).collect(Collectors.toList());
+		}
+
+		if (etat != null && etat != "") {
+			cars = cars.stream().filter(car -> car.getEtat().equals(etat)).collect(Collectors.toList());
+		}
+
+		if (marque != null && marque != "") {
+			cars = cars.stream().filter(car -> car.getMarque().equals(marque)).collect(Collectors.toList());
+		}
+
+		if (tarif != null && tarif != "") {
+			System.out.println("tarif: " + Double.parseDouble(tarif));
+			cars = cars.stream().filter(car -> car.getTarif() <= Double.parseDouble(tarif))
+					.collect(Collectors.toList());
+		}
+
+		return cars.stream().map(car -> {
 			return CarsDto.fromEntity(car);
 		}).collect(Collectors.toList());
 	}

@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +12,14 @@ import com.example.demo.dto.ReservationRequest;
 import com.example.demo.services.reservations.ReservationService;
 
 import java.util.List;
+
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/reservations")
 @RequiredArgsConstructor
 public class ReservationController {
-	@Autowired
-    private  ReservationService reservationService;
+    @Autowired
+    private ReservationService reservationService;
 
     // Créer une nouvelle réservation
     @PostMapping("/creer")
@@ -30,16 +30,18 @@ public class ReservationController {
 
     // Modifier une réservation existante
     @PutMapping("/modifier/{id}")
-    public ResponseEntity<ReservationDto> updateReservation(@PathVariable int id, @RequestBody ReservationRequest reservationRequest) {
+    public ResponseEntity<ReservationDto> updateReservation(@PathVariable int id,
+            @RequestBody ReservationRequest reservationRequest) {
         ReservationDto updatedReservation = reservationService.modifierReservation(id, reservationRequest);
         return ResponseEntity.ok(updatedReservation);
     }
+
     @PutMapping("/confirmer/{id}")
     public ResponseEntity<ReservationDto> confirmerReservation(@PathVariable int id) {
         ReservationDto updatedReservation = reservationService.confirmerReservation(id);
         return ResponseEntity.ok(updatedReservation);
     }
-    
+
     @GetMapping("/montant-total/{id}")
     public ResponseEntity<Double> getMontantTotal(@PathVariable Long id) {
         try {
@@ -49,6 +51,7 @@ public class ReservationController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
+
     // Supprimer une réservation par ID
     @DeleteMapping("/supprimer/{id}")
     public ResponseEntity<Void> deleteReservation(@PathVariable int id) {
@@ -69,16 +72,19 @@ public class ReservationController {
         ReservationDto reservation = reservationService.getReservationById(id);
         return ResponseEntity.ok(reservation);
     }
+
     @GetMapping("/count")
     public long getNombreReservations() {
         return reservationService.getNombreResrvation();
     }
+
     @GetMapping("/countReservationClient/{id}")
     public long getNombreResrvationDuClient(@PathVariable Long id) {
         return reservationService.getNombreResrvationDuClient(id);
     }
+
     @GetMapping("/countReservationClientStatu/{id}/{statu}")
-    public long getNombreResrvationDuClientAndstatu(@PathVariable Long id,@PathVariable String statu) {
+    public long getNombreResrvationDuClientAndstatu(@PathVariable Long id, @PathVariable String statu) {
         return reservationService.getNombreResrvationDuClientAndStatu(id, statu);
     }
 }
