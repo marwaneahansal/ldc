@@ -130,6 +130,18 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
+	public ReservationDto annulerReservation(int id) {
+		Reservation reservationExistante = reservationRepository.findById((long) id)
+				.orElseThrow(() -> new RuntimeException("Réservation introuvable avec l'ID " + id));
+
+		reservationExistante.setStatu("Annule");
+
+		Reservation reservationModifiee = reservationRepository.save(reservationExistante);
+
+		return convertirEnDto(reservationModifiee);
+	}
+
+	@Override
 	public ReservationDto retournerReservation(int id) {
 		Reservation reservationExistante = reservationRepository.findById((long) id)
 				.orElseThrow(() -> new RuntimeException("Réservation introuvable avec l'ID " + id));

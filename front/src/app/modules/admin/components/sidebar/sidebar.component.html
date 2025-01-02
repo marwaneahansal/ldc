@@ -4,38 +4,38 @@
       <span class="text">AdminHub</span>
     </a>
     <ul class="side-menu top">
-      <li [class.active]="activeMenuIndex === 0">
-        <a  (click)="onMenuClick(0)" (click)="onSidebarClick('dashboard')">
+      <li [class.active]="currentRoute === '/admin-dashboard'">
+        <a  (click)="navigateTo('/admin-dashboard')">
           <i class='bx bxs-dashboard'></i>
           <span class="text">Dashboard</span>
         </a>
       </li>
-      <li [class.active]="activeMenuIndex === 1">
-        <a  (click)="onMenuClick(1)" (click)="onSidebarClick('detail')">
+      <li [class.active]="currentRoute === '/admin-dashboard/details'">
+        <a  (click)="navigateTo('/admin-dashboard/details')">
           <i class='bx bxs-user'></i>
           <span class="text">Mon Profile</span>
         </a>
       </li>
-      <li [class.active]="activeMenuIndex === 2">
-        <a  (click)="onSidebarClick('gestionClients')" (click)="onMenuClick(2)">
+      <li [class.active]="currentRoute === '/admin-dashboard/clients'">
+        <a  (click)="navigateTo('/admin-dashboard/clients')">
           <i class='bx bxs-group'></i>
           <span class="text">Gestion Des Clients</span>
         </a>
       </li>
-      <li [class.active]="activeMenuIndex === 3">
-        <a  (click)="onSidebarClick('gestionCars')" (click)="onMenuClick(3)">
+      <li [class.active]="currentRoute === '/admin-dashboard/voitures'">
+        <a  (click)="navigateTo('/admin-dashboard/voitures')">
           <i class='bx bxs-car'></i>
           <span class="text">Gestion Des Voitures</span>
         </a>
       </li>
-      <li [class.active]="activeMenuIndex === 4">
-        <a  (click)="onSidebarClick('gestionReservations')" (click)="onMenuClick(4)">
+      <li [class.active]="currentRoute === '/admin-dashboard/reservations'">
+        <a  (click)="navigateTo('/admin-dashboard/reservations')">
           <i class='bx bxs-calendar-check'></i>
           <span class="text">Gestion Des Reservations</span>
         </a>
       </li>
-      <li [class.active]="activeMenuIndex === 5">
-        <a  (click)="onSidebarClick('gestionPaiements')" (click)="onMenuClick(5)">
+      <li [class.active]="currentRoute === '/admin-dashboard/paiements'">
+        <a  (click)="navigateTo('/admin-dashboard/paiements')">
           <i class='bx bx-money'></i>
           <span class="text">Gestion Des Paiement</span>
         </a>

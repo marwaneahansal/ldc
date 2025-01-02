@@ -92,6 +92,12 @@ public class ReservationController {
         return ResponseEntity.ok(updatedReservation);
     }
 
+    @PutMapping("/annuler/{id}")
+    public ResponseEntity<ReservationDto> annulerReservation(@PathVariable int id) {
+        ReservationDto updatedReservation = reservationService.annulerReservation(id);
+        return ResponseEntity.ok(updatedReservation);
+    }
+
     @PutMapping("/retourner/{id}")
     public ResponseEntity<ReservationDto> retournerReservation(@PathVariable int id) {
         ReservationDto updatedReservation = reservationService.retournerReservation(id);

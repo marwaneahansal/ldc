@@ -105,6 +105,10 @@ export class AdminService {
     return this.http.put(`${this.api}/reservations/retourner/${id}`, null);
   }
 
+  annulerReservation(id: number): Observable<any> {
+    return this.http.put(`${this.api}/reservations/annuler/${id}`, null);
+  }
+
   /////////////////// Les Paiements /////////////////////////
   // Récupérer toutes les paiements
   getPaiements(): Observable<PaiementModele[]> {

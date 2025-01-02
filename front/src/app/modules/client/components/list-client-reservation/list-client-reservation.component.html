@@ -23,6 +23,7 @@
         <td>
           <!-- Boutons pour modifier et supprimer -->
           <button (click)="retourReservation(reservation.id_reservation)" class="btn-edit" *ngIf="reservation.statu === 'Confirme'">Retourner</button>
+          <button (click)="annulerReservation(reservation.id_reservation)" class="btn-annuler" *ngIf="reservation.statu === 'En attente de paiement'">Annuler</button>
           <button (click)="payerReservation(reservation.id_reservation)" class="btn-edit" *ngIf="reservation.statu === 'En attente de paiement'">Payer</button>
           <button (click)="deleteReservation(reservation.id_reservation)" class="btn-delete" *ngIf="reservation.statu === 'En attente'">Supprimer</button>
         </td>

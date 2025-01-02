@@ -14,6 +14,7 @@ public interface ReservationService {
     ReservationDto creerReservation(ReservationRequest reservationRequest);
     ReservationDto modifierReservation(int id, ReservationRequest reservationRequest);
     ReservationDto confirmerReservation(int id);
+    ReservationDto annulerReservation(int id);
     ReservationDto retournerReservation(int id);
     void supprimerReservation(int id);
     List<ReservationDto> getToutesLesReservations();

@@ -64,6 +64,20 @@ export class ListClientReservationComponent {
     });
   }
 
+  annulerReservation(reservationId: number): void {
+    this.reservationService.annulerReservation(reservationId).subscribe({
+      next: (data) => {
+        console.log('Réservation anulée avec succès');
+        this.getReservations();
+        alert("Réservation anulée avec succès");
+      },
+      error: (error) => {
+        console.error("Erreur lors de l'annulation de la réservation:", error);
+        alert("Erreur lors de l'annulation de la réservation");
+      }
+    })
+  }
+
   retourReservation(id: number): void {
     this.reservationService.retournerReservation(id).subscribe({
       next: (data: ReservationModele) => {

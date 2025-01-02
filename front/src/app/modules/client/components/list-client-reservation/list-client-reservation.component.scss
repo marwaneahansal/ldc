@@ -75,6 +75,16 @@ button {
   background-color: #c82333;
 }
 
+.btn-annuler {
+  // yellow color
+  background-color: #ffc107;
+  color: white;
+}
+
+.btn-annuler:hover {
+  background-color: #e0a800;
+}
+
 /* Styles pour les images si besoin */
 .car-image {
   width: 50px;

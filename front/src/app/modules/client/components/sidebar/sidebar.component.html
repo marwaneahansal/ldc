@@ -4,28 +4,28 @@
       <span class="text">{{ client.nom + " "+ client.prenom}}</span>
     </a>
     <ul class="side-menu top">
-      <li [class.active]="activeMenuIndex === 0">
-        <a  (click)="onMenuClick(0)" (click)="onSidebarClick('dashboard')">
+      <li [class.active]="currentRoute === '/client-dashboard'">
+        <a  (click)="navigateTo('/client-dashboard')">
           <i class='bx bxs-dashboard'></i>
           <span class="text">Dashboard</span>
         </a>
       </li>
-      <li [class.active]="activeMenuIndex === 1">
-        <a  (click)="onMenuClick(1)" (click)="onSidebarClick('detail')">
+      <li [class.active]="currentRoute === '/client-dashboard/details'">
+        <a  (click)="navigateTo('/client-dashboard/details')">
           <i class='bx bxs-user'></i>
           <span class="text">Mon Profile</span>
         </a>
       </li>
       
      
-      <li [class.active]="activeMenuIndex === 4">
-        <a  (click)="onSidebarClick('gestionReservations')" (click)="onMenuClick(4)">
+      <li [class.active]="currentRoute === '/client-dashboard/reservations'">
+        <a  (click)="navigateTo('/client-dashboard/reservations')">
           <i class='bx bxs-calendar-check'></i>
           <span class="text">Mes Reservations</span>
         </a>
       </li>
-      <li [class.active]="activeMenuIndex === 5">
-        <a  (click)="onSidebarClick('gestionPaiements')" (click)="onMenuClick(5)">
+      <li [class.active]="currentRoute === '/client-dashboard/payments'">
+        <a  (click)="navigateTo('/client-dashboard/payments')">
           <i class='bx bx-money'></i>
           <span class="text">Mes Paiement</span>
         </a>

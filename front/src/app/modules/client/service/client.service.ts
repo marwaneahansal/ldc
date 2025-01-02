@@ -53,6 +53,10 @@ export class ClientService {
     return this.http.delete<void>(`${this.apiUrl1}/supprimer/${id}`);
   }
 
+  annulerReservation(id: number): Observable<any> {
+    return this.http.put(`${this.api}/reservations/annuler/${id}`, null);
+  }
+
   getContract(id: number): Observable<any> {
     return this.http.get(`${this.api}/contrats/reservation/${id}`);
   }
