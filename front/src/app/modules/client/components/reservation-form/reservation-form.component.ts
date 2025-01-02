@@ -49,6 +49,7 @@ export class ReservationFormComponent implements OnInit {
 
   // Soumettre la réservation
   submitReservation(): void {
+    this.errorMessage = '';
     if (this.isStartDateValid()) {
       if (!this.carId || !this.userId) {
         this.errorMessage = 'Informations utilisateur ou voiture manquantes.';
@@ -66,11 +67,10 @@ export class ReservationFormComponent implements OnInit {
         next: (response) => {
           console.log(response);
           alert('Réservation réussie! Veillerz attendre la confirmation.');
-          // this.router.navigate(['/confirmer', response.id_reservation]); // Redirection après succès
         },
         error: (error) => {
-          console.error('Erreur lors de la réservation :', error);
-          this.errorMessage = 'Une erreur est survenue lors de la réservation.';
+          const message = error.error.message;
+          this.errorMessage = message || 'Une erreur est survenue lors de la réservation.';
         },
       });
     } else {

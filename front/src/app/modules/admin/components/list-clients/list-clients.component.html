@@ -3,7 +3,7 @@
     <h2>Liste des Clients</h2>
   
     <!-- Bouton pour ajouter un nouveau client -->
-    <button (click)="openAddClientForm()" class="btn-add-client">Ajouter un Client</button>
+    <!-- <button (click)="openAddClientForm()" class="btn-add-client">Ajouter un Client</button> -->
   
     <!-- Tableau affichant les clients -->
     <table class="clients-table">
@@ -14,7 +14,7 @@
           <th>Email</th>
           <th>Numéro de téléphone</th>
           <th>Adresse</th>
-          <th>Actions</th>
+          <!-- <th>Actions</th> -->
         </tr>
       </thead>
       <tbody>
@@ -24,11 +24,11 @@
           <td>{{ client.email }}</td>
           <td>{{ client.numero_tel }}</td>
           <td>{{ client.adresse }}</td>
-          <td>
+          <!-- <td> -->
             <!-- Boutons pour modifier et supprimer -->
-            <button (click)="editClient(client)" class="btn-edit">Modifier</button>
-            <button (click)="deleteClient(client.id)" class="btn-delete">Supprimer</button>
-          </td>
+            <!-- <button (click)="editClient(client)" class="btn-edit">Modifier</button>
+            <button (click)="deleteClient(client.id)" class="btn-delete">Supprimer</button> -->
+          <!-- </td> -->
         </tr>
       </tbody>
     </table>

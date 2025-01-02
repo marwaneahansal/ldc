@@ -1,5 +1,5 @@
 <div class="container">
-  <h2>Liste des Réservations</h2>
+  <h2>Mes Réservations</h2>
 
   <!-- Tableau affichant les réservations -->
   <table class="reservations-table">
@@ -22,6 +22,7 @@
         <td>{{ reservation.statu }}</td>
         <td>
           <!-- Boutons pour modifier et supprimer -->
+          <button (click)="retourReservation(reservation.id_reservation)" class="btn-edit" *ngIf="reservation.statu === 'Confirme'">Retourner</button>
           <button (click)="payerReservation(reservation.id_reservation)" class="btn-edit" *ngIf="reservation.statu === 'En attente de paiement'">Payer</button>
           <button (click)="deleteReservation(reservation.id_reservation)" class="btn-delete" *ngIf="reservation.statu === 'En attente'">Supprimer</button>
         </td>

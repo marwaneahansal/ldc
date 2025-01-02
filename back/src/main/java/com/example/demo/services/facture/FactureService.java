@@ -12,6 +12,7 @@ import com.example.demo.dto.FactureRequest;
 @Service
 public interface FactureService {
     List<FactureDto> getAllFactures();
+    List<FactureDto> getClientFactures(long clientId);
     FactureDto getFactureById(long id);
     FactureDto createFacture(FactureRequest factureRequest);
    // FactureDto createFacture(Long id);

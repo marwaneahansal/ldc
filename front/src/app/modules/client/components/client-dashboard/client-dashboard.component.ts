@@ -6,10 +6,11 @@ import { ClientService } from '../../service/client.service';
 import { AuthService } from '../../../../auth/services/auth/auth.service';
 import { ClientDetailComponent } from '../client-detail/client-detail.component';
 import { ListClientReservationComponent } from "../list-client-reservation/list-client-reservation.component";
+import { ListClientPaymentsComponent } from "../list-client-payments/list-client-payments.component";
 @Component({
   selector: 'app-client-dashboard',
   standalone: true,
-  imports: [CommonModule, NavbarComponent, SidebarComponent, ClientDetailComponent, ListClientReservationComponent],
+  imports: [CommonModule, NavbarComponent, SidebarComponent, ClientDetailComponent, ListClientReservationComponent, ListClientPaymentsComponent],
   templateUrl: './client-dashboard.component.html',
   styleUrl: './client-dashboard.component.scss'
 })

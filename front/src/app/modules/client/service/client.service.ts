@@ -11,6 +11,7 @@ import { switchMap, catchError, tap } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class ClientService {
+  private api = 'http://localhost:8080/api';
   private apiUrl = 'http://localhost:8080/api/reservations/confirmer';
   private apiUrl2 = 'http://localhost:8080/api/contrats';
   private apiUrl1 = 'http://localhost:8080/api/reservations';
@@ -36,8 +37,24 @@ export class ClientService {
     this.http.post(`${this.apiUrl2}/${id}/generate-pdf-with-signature`,signature)
     return this.http.put(`${this.apiUrl}/${id}`,null);
   }*/
-  getReservations(): Observable<ReservationModele[]> {
-    return this.http.get<ReservationModele[]>(`${this.apiUrl1}/toutes`);
+  getReservations(userId: number): Observable<ReservationModele[]> {
+    return this.http.get<ReservationModele[]>(`${this.apiUrl1}/clients/${userId}`);
+  }
+
+  getPaiments(userId: number): Observable<PaiementModele[]> {
+    return this.http.get<PaiementModele[]>(`${this.api}/factures/clients/${userId}`);
+  }
+
+  retournerReservation(id: number): Observable<any> {
+    return this.http.put(`${this.apiUrl1}/retourner/${id}`, null);
+  }
+
+  deleteReservation(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl1}/supprimer/${id}`);
+  }
+
+  getContract(id: number): Observable<any> {
+    return this.http.get(`${this.api}/contrats/reservation/${id}`);
   }
 
   confirmReservation(id: number, signatureData: string): Observable<any> {

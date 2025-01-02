@@ -35,6 +35,10 @@ client : any;
     this.sectionChanged.emit(section);  // Émettre la section cliquée vers le parent
   }
 
+  navigateTo(path: string): void {
+    this.router.navigate([path]);
+  }
+
   logout() {
     this.authService.logout();
     this.router.navigate(['/login']);

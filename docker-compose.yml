@@ -39,7 +39,7 @@ services:
     restart: unless-stopped
     volumes:
       - ./front:/app/
-      - ensa_front_modules:/app/node_modules
+      - /app/node_modules
     networks:
       - ensa
 
@@ -74,12 +74,12 @@ services:
     
 volumes:
   dbdata:
-  ensa_front_modules:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: ./front/node_modules
+  # ensa_front_modules:
+  #   driver: local
+  #   driver_opts:
+  #     type: none
+  #     o: bind
+  #     device: ./front/node_modules
 
 networks:
   ensa:

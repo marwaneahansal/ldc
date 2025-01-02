@@ -2,6 +2,8 @@ package com.example.demo.controller;
 
 
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.List;
 
 
@@ -33,6 +35,15 @@ public class ContratController {
     @GetMapping("/{id}")
     public ResponseEntity<ContratDao> getContratById(@PathVariable Long id) {
         ContratDao contrat = contratsService.getContratById(id);
+        if (contrat != null) {
+            return ResponseEntity.ok(contrat);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("reservation/{id}")
+    public ResponseEntity<ContratDao> getContratByReservationId(@PathVariable Long id) {
+        ContratDao contrat = contratsService.getContratByIdReservation(id);
         if (contrat != null) {
             return ResponseEntity.ok(contrat);
         }
@@ -72,6 +83,18 @@ public class ContratController {
 
         // Générer le PDF avec la signature
         byte[] pdf = contratsService.generateContratPDFWithSignature(contrat, signatureImage);
+
+        // save the contract PDF in the "assets" folder
+        String uploadDir = System.getProperty("user.dir") + "/src/main/resources/static/assets/";
+        File directory = new File(uploadDir);
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+        String filePath = uploadDir + "contrat_" + id + ".pdf";
+
+        try (FileOutputStream fos = new FileOutputStream(filePath)) {
+            fos.write(pdf);
+        }
 
         // Retourner le PDF généré
         return ResponseEntity.ok()

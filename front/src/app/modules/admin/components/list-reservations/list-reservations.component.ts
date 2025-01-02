@@ -54,6 +54,20 @@ export class ListReservationsComponent implements OnInit {
     })
   }
 
+  retorunerReservation(reservationId: number): void {
+    this.reservationService.retournerReservation(reservationId).subscribe({
+      next: (data) => {
+        console.log('Réservation retournée avec succès');
+        this.getReservations();
+        alert("Réservation retournée avec succès");
+      },
+      error: (error) => {
+        console.error('Erreur lors de la retournement de la réservation:', error);
+        alert("Erreur lors de la retournement de la réservation");
+      }
+    })
+  }
+
   // Supprimer une réservation
   deleteReservation(id: number): void {
     this.reservationService.deleteReservation(id).subscribe({

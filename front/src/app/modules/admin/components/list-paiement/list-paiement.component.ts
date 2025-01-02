@@ -1,4 +1,4 @@
-import { Component ,OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminService } from '../../services/admin.service';
 import { PaiementModele } from '../../modele/paiement.modele.model';
@@ -8,7 +8,7 @@ import { PaiementModele } from '../../modele/paiement.modele.model';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './list-paiement.component.html',
-  styleUrl: './list-paiement.component.scss'
+  styleUrl: './list-paiement.component.scss',
 })
 export class ListPaiementComponent implements OnInit {
   paiements: PaiementModele[] = []; // Liste des paiements
@@ -42,7 +42,7 @@ export class ListPaiementComponent implements OnInit {
   deletePayment(id: number): void {
     this.paiementService.deletePaiement(id).subscribe(
       () => {
-        this.paiements = this.paiements.filter(p => p.id_facture !== id);
+        this.paiements = this.paiements.filter((p) => p.id_facture !== id);
         console.log('Paiement supprimé avec succès');
       },
       (error) => {
@@ -51,11 +51,21 @@ export class ListPaiementComponent implements OnInit {
     );
   }
 
-    // Télécharger la facture
-    downloadFacture(id: number): void {
-      const url = `http://localhost:8080/api/factures/download/${id}`;
-      window.open(url, '_blank');
-    }
-  
+  // Télécharger la facture
+  downloadFacture(id: number): void {
+    const url = `http://localhost:8080/api/factures/download/${id}`;
+    window.open(url, '_blank');
+  }
 
+  downloadContrat(reservation: any): void {
+    this.paiementService.getContract(reservation.id_resrvation).subscribe({
+      next: (data) => {
+        const url = `http://localhost:8080/assets/contrat_${data.idContrat}.pdf`;
+        window.open(url, '_blank');
+      },
+      error: (error) => {
+        console.error('Erreur lors du téléchargement du contrat:', error);
+      },
+    });
+  }
 }

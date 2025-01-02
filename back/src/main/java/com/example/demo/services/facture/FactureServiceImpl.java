@@ -61,6 +61,13 @@ public class FactureServiceImpl implements FactureService {
     }
 
     @Override
+    public List<FactureDto> getClientFactures(long clientId) {
+        return factureRepository.getClientFactures(clientId).stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public FactureDto getFactureById(long id) {
         Facture facture = factureRepository.findById(id).orElseThrow(() -> new RuntimeException("Facture not found"));
         return convertToDTO(facture);

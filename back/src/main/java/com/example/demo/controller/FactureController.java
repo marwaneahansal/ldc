@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpHeaders;
@@ -11,11 +10,12 @@ import com.example.demo.dto.FactureRequest;
 import com.example.demo.services.facture.FactureService;
 
 import java.util.List;
+
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/factures")
 public class FactureController {
-	@Autowired
+    @Autowired
     private final FactureService factureService;
 
     public FactureController(FactureService factureService) {
@@ -25,6 +25,11 @@ public class FactureController {
     @GetMapping("/tous")
     public List<FactureDto> getAllFactures() {
         return factureService.getAllFactures();
+    }
+
+    @GetMapping("/clients/{clientId}")
+    public List<FactureDto> getAllFactures(@PathVariable long clientId) {
+        return factureService.getClientFactures(clientId);
     }
 
     @GetMapping("/{id}")
@@ -46,13 +51,16 @@ public class FactureController {
     public void deleteFacture(@PathVariable long id) {
         factureService.deleteFacture(id);
     }
+
     @GetMapping("/somme")
     public double getSommeMontants() {
         return factureService.getSommeMontantsFactures();
     }
+
     @GetMapping("/download/{idPaiement}")
     public ResponseEntity<byte[]> downloadFacture(@PathVariable Long idPaiement) throws Exception {
-        FactureDto paiement = factureService.getFactureById(idPaiement); // Récupérer le paiement depuis la base de données
+        FactureDto paiement = factureService.getFactureById(idPaiement); // Récupérer le paiement depuis la base de
+                                                                         // données
         byte[] pdf = factureService.generateFacturePDF(paiement);
 
         HttpHeaders headers = new HttpHeaders();

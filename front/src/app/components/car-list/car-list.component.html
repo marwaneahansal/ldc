@@ -41,7 +41,8 @@
         <p>Etat : {{ car.etat }} </p>
         <button class="details-btn" [routerLink]="['/details', car.id]">Détails</button>
 
-        <button class="reserv-btn" (click)="reserveCar(car)" *ngIf="car.etat === 'Disponible'">Réserver</button>
+        <!-- *ngIf="car.etat === 'Disponible'" -->
+        <button class="reserv-btn" (click)="reserveCar(car)">Réserver</button>
       </div>
     </div>
   </div>

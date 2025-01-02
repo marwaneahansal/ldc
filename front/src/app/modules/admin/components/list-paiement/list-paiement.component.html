@@ -8,8 +8,9 @@
           <th>Client</th>
           <th>Date Paiement</th>
           <th>Montant (MAD)</th>
+          <th>Contrat</th>
           <th>Facture</th>
-          <th>Actions</th>
+          <!-- <th>Actions</th> -->
         </tr>
       </thead>
       <tbody>
@@ -18,13 +19,15 @@
           <td>{{ paiement.date_paiement | date: 'dd/MM/yyyy' }}</td>
           <td>{{ paiement.montant | number: '1.2-2' }}</td>
           <td>
-            <a (click)="downloadFacture(paiement.id_facture)" class="btn-download">Télécharger</a>
+            <a (click)="downloadContrat(paiement.reservation)" class="btn-download">Télécharger</a>
           </td>
           <td>
-            <!-- Boutons pour modifier et supprimer -->
+            <a (click)="downloadFacture(paiement.id_facture)" class="btn-download">Télécharger</a>
+          </td>
+          <!-- <td>
             <button (click)="editPayment(paiement)" class="btn-edit">Modifier</button>
             <button (click)="deletePayment(paiement.id_facture)" class="btn-delete">Supprimer</button>
-          </td>
+          </td> -->
         </tr>
       </tbody>
     </table>

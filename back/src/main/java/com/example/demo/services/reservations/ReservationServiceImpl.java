@@ -87,6 +87,13 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
+	public List<ReservationDto> getClientLesReservations(long clientId) {
+		return reservationRepository.findByClientId(clientId).stream()
+				.map(this::convertirEnDto)
+				.collect(Collectors.toList());
+	}
+
+	@Override
 	public ReservationDto getReservationById(int id) {
 		Reservation reservation = reservationRepository.findById((long) id)
 				.orElseThrow(() -> new RuntimeException("Réservation introuvable avec l'ID " + id));
@@ -116,6 +123,21 @@ public class ReservationServiceImpl implements ReservationService {
 				.orElseThrow(() -> new RuntimeException("Réservation introuvable avec l'ID " + id));
 
 		reservationExistante.setStatu("En attente de paiement");
+
+		Reservation reservationModifiee = reservationRepository.save(reservationExistante);
+
+		return convertirEnDto(reservationModifiee);
+	}
+
+	@Override
+	public ReservationDto retournerReservation(int id) {
+		Reservation reservationExistante = reservationRepository.findById((long) id)
+				.orElseThrow(() -> new RuntimeException("Réservation introuvable avec l'ID " + id));
+
+		reservationExistante.setStatu("Termine");
+		Car car = reservationExistante.getCar();
+		car.setEtat("Disponible");
+		this.carsRepository.save(car);
 
 		Reservation reservationModifiee = reservationRepository.save(reservationExistante);
 

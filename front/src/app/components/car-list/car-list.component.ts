@@ -42,7 +42,6 @@ export class CarListComponent implements OnInit {
 
   // Rechercher des voitures
   searchCars(): void {
-    console.log("date --> ", this.searchFilters.date);
     const filters = {
       type: this.searchFilters.type,
       marque: this.searchFilters.marque,
