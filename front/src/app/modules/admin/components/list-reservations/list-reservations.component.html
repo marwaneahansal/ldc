@@ -24,8 +24,8 @@
           <td>{{ reservation.statu }}</td>
           <td>
             <!-- Boutons pour modifier et supprimer -->
-            <button (click)="editReservation(reservation)" class="btn-edit">Modifier</button>
-            <button (click)="deleteReservation(reservation.id_reservation)" class="btn-delete">Supprimer</button>
+            <button (click)="confirmReservation(reservation.id_reservation)" class="btn-edit" *ngIf="reservation.statu === 'En attente'">Confirmer</button>
+            <button (click)="deleteReservation(reservation.id_reservation)" class="btn-delete" *ngIf="reservation.statu === 'En attente'">Supprimer</button>
           </td>
         </tr>
       </tbody>

@@ -37,7 +37,6 @@ import java.io.ByteArrayOutputStream;
 
 import java.time.temporal.ChronoUnit;
 
-
 @Service
 public class ContratsServiceImpl implements ContratsService {
 
@@ -54,7 +53,7 @@ public class ContratsServiceImpl implements ContratsService {
 
         for (Contrat contrat : contrats) {
             ContratDao contratDao = new ContratDao();
-            contratDao.setIdContrat(contrat.getId()); 
+            contratDao.setIdContrat(contrat.getId());
             contratDao.setReservation(contrat.getReservation());
             contratDaos.add(contratDao);
         }
@@ -73,7 +72,7 @@ public class ContratsServiceImpl implements ContratsService {
             contratDao.setEtat(contrat.getEtat());
             return contratDao;
         }
-        return null; 
+        return null;
     }
 
     @Override
@@ -82,13 +81,11 @@ public class ContratsServiceImpl implements ContratsService {
         if (reservationOpt.isPresent()) {
             Reservation reservation = reservationOpt.get();
 
-            
             Contrat contrat = new Contrat();
             contrat.setReservation(reservation);
             contrat.setEtat("valide");
             contratRepository.save(contrat);
 
-            
             ContratDao contratDao = new ContratDao();
             contratDao.setIdContrat(contrat.getId());
             contratDao.setReservation(reservation);
@@ -100,12 +97,13 @@ public class ContratsServiceImpl implements ContratsService {
 
     @Override
     public void supprimer(Long id) {
-       
+
         contratRepository.deleteById(id);
         System.out.println("Contrat supprimé avec succès !");
     }
+
     @Override
-    public byte[] generateContratPDFWithSignature(ContratDao contrat,byte[] signatureImage) throws Exception {
+    public byte[] generateContratPDFWithSignature(ContratDao contrat, byte[] signatureImage) throws Exception {
         // Création du flux de sortie pour le PDF
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PdfWriter writer = new PdfWriter(baos);
@@ -128,19 +126,22 @@ public class ContratsServiceImpl implements ContratsService {
 
         // Informations principales du contrat
         document.add(new Paragraph("Numéro de Contrat : " + contrat.getIdContrat()).setFont(contentFont));
-        document.add(new Paragraph("Nom du Client : " + contrat.getReservation().getUser().getNom()).setFont(contentFont));
-        document.add(new Paragraph("Prénom du Client : " + contrat.getReservation().getUser().getPrenom()).setFont(contentFont));
+        document.add(
+                new Paragraph("Nom du Client : " + contrat.getReservation().getUser().getNom()).setFont(contentFont));
+        document.add(new Paragraph("Prénom du Client : " + contrat.getReservation().getUser().getPrenom())
+                .setFont(contentFont));
         document.add(new Paragraph("Email : " + contrat.getReservation().getUser().getEmail()).setFont(contentFont));
-        document.add(new Paragraph("Téléphone : " + contrat.getReservation().getUser().getNumero_tel()).setFont(contentFont));
-        document.add(new Paragraph("Voiture Louée : " + contrat.getReservation().getCar().getModele()).setFont(contentFont));
+        document.add(new Paragraph("Téléphone : " + contrat.getReservation().getUser().getNumero_tel())
+                .setFont(contentFont));
+        document.add(
+                new Paragraph("Voiture Louée : " + contrat.getReservation().getCar().getModele()).setFont(contentFont));
         document.add(new Paragraph("Date de Début : " + contrat.getReservation().getDate_debut()).setFont(contentFont));
         document.add(new Paragraph("Date de Fin : " + contrat.getReservation().getDate_fin()).setFont(contentFont));
 
         // Calcul du nombre de jours et montant total
         long daysBetween = ChronoUnit.DAYS.between(
                 contrat.getReservation().getDate_debut().toInstant(),
-                contrat.getReservation().getDate_fin().toInstant()
-        );
+                contrat.getReservation().getDate_fin().toInstant());
         double montantTotal = contrat.getReservation().getCar().getTarif() * daysBetween;
 
         document.add(new Paragraph("Nombre de Jours : " + daysBetween).setFont(contentFont));
@@ -151,35 +152,40 @@ public class ContratsServiceImpl implements ContratsService {
 
         // Clauses du contrat
         document.add(new Paragraph("Clauses du Contrat :").setFont(titleFont).setFontSize(14));
-        document.add(new Paragraph("1. Le locataire est responsable de tout dommage causé à la voiture.").setFont(contentFont));
-        document.add(new Paragraph("2. La voiture doit être retournée avec le plein de carburant.").setFont(contentFont));
-        document.add(new Paragraph("3. Tout retard dans le retour entraînera des frais supplémentaires.").setFont(contentFont));
+        document.add(new Paragraph("1. Le locataire est responsable de tout dommage causé à la voiture.")
+                .setFont(contentFont));
+        document.add(
+                new Paragraph("2. La voiture doit être retournée avec le plein de carburant.").setFont(contentFont));
+        document.add(new Paragraph("3. Tout retard dans le retour entraînera des frais supplémentaires.")
+                .setFont(contentFont));
 
         // Ajouter un espace avant la signature
         document.add(new Paragraph("\n"));
-     // Ajout de la section signature
+        // Ajout de la section signature
         document.add(new Paragraph("Signature :").setFontSize(14).setBold());
-
 
         // Insertion de l'image de la signature
         if (signatureImage != null) {
             ImageData imageData = ImageDataFactory.create(signatureImage);
             Image signature = new Image(imageData);
-            signature.setWidth(150);  // Ajustez la taille
+            signature.setWidth(150); // Ajustez la taille
             signature.setHeight(50);
             document.add(signature);
         } else {
             document.add(new Paragraph("Aucune signature fournie."));
         }
-     
+
         // Fermeture du document
         document.close();
-        // this.sendContratEmail(contrat.getReservation().getUser().getEmail(), "contrat de location voiture", "", baos.toByteArray());
+        // this.sendContratEmail(contrat.getReservation().getUser().getEmail(), "contrat
+        // de location voiture", "", baos.toByteArray());
         return baos.toByteArray();
     }
+
     @Override
- // Nouvelle méthode pour envoyer le PDF par email
-    public void sendContratEmail(String recipientEmail, String subject, String body, byte[] contratPdf) throws Exception {
+    // Nouvelle méthode pour envoyer le PDF par email
+    public void sendContratEmail(String recipientEmail, String subject, String body, byte[] contratPdf)
+            throws Exception {
         String host = "smtp.gmail.com"; // Utilisez votre serveur SMTP (ici Gmail)
         final String fromEmail = "smaildamouh47@gmail.com"; // Votre adresse email
         final String password = "ma3ine2002"; // Votre mot de passe (ou mot de passe d'application si nécessaire)
@@ -227,16 +233,17 @@ public class ContratsServiceImpl implements ContratsService {
         System.out.println("Email envoyé avec succès!");
     }
 
-	@Override
-	public ContratDao getContratByIdReservation(Long id) {
-		ContratDao contratDao = this.convertTDao( contratRepository.contratByreservationId(id));
-		return contratDao;
-	}
-	private ContratDao convertTDao(Contrat contrat) {
-		ContratDao contratDao = new ContratDao();
-		contratDao.setIdContrat(contrat.getId());
-		contratDao.setReservation(contrat.getReservation());
-		contratDao.setEtat(contrat.getEtat());
-		return contratDao;
-	}
+    @Override
+    public ContratDao getContratByIdReservation(Long id) {
+        ContratDao contratDao = this.convertTDao(contratRepository.contratByreservationId(id));
+        return contratDao;
+    }
+
+    private ContratDao convertTDao(Contrat contrat) {
+        ContratDao contratDao = new ContratDao();
+        contratDao.setIdContrat(contrat.getId());
+        contratDao.setReservation(contrat.getReservation());
+        contratDao.setEtat(contrat.getEtat());
+        return contratDao;
+    }
 }

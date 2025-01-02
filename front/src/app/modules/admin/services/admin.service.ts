@@ -17,7 +17,8 @@ export class AdminService {
   private apiUrl4 = 'http://localhost:8080/api/cars/tous'; 
   private apiUrl4_1 = 'http://localhost:8080/api/cars';
   private apiUrl5 = 'http://localhost:8080/api/reservations/toutes';
-  private apiUrl6 = 'http://localhost:8080/api/factures/tous'; 
+  private apiUrl6 = 'http://localhost:8080/api/factures/tous';
+  private api = 'http://localhost:8080/api';
   constructor(private http: HttpClient) { }
 
   getNombreClients(): Observable<number> {
@@ -69,6 +70,10 @@ export class AdminService {
   // Supprimer une réservation par ID
   deleteReservation(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl5}/${id}`);
+  }
+
+  confirmReservation(id: number): Observable<void> {
+    return this.http.put<void>(`${this.api}/reservations/confirmer/${id}`, null);
   }
 
   // Ajouter une nouvelle réservation

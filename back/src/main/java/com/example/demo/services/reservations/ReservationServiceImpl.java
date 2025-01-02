@@ -178,10 +178,18 @@ public class ReservationServiceImpl implements ReservationService {
 					&& !LocalDate.now().isBefore(dateDeDebut)
 					&& !LocalDate.now().isAfter(dateDeFin)) {
 
-				reservation.setStatu("En cours");
+				// reservation.setStatu("En cours");
 				Car car = reservation.getCar();
 				car.setEtat("Reserve");
 				this.carsRepository.save(car); // Mettre à jour l'état de la voiture
+			} 
+			// resetvation is finished make the car available
+			else if (reservation.getStatu().equalsIgnoreCase("Confirme")
+					&& LocalDate.now().isAfter(dateDeFin)) {
+				reservation.setStatu("Termine");
+				Car car = reservation.getCar();
+				car.setEtat("Disponible");
+				this.carsRepository.save(car); 
 			}
 
 			// Sauvegarde les modifications

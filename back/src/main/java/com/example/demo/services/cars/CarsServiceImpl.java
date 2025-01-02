@@ -78,7 +78,6 @@ public class CarsServiceImpl implements CarsService {
 		}
 
 		if (tarif != null && tarif != "") {
-			System.out.println("tarif: " + Double.parseDouble(tarif));
 			cars = cars.stream().filter(car -> car.getTarif() <= Double.parseDouble(tarif))
 					.collect(Collectors.toList());
 		}

@@ -6,8 +6,10 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.dto.FactureDto;
 import com.example.demo.dto.FactureRequest;
+import com.example.demo.entity.Car;
 import com.example.demo.entity.Facture;
 import com.example.demo.entity.Reservation;
+import com.example.demo.repository.CarsRespository;
 import com.example.demo.repository.FactureRepository;
 import com.example.demo.repository.ReservationRepository;
 
@@ -41,11 +43,14 @@ public class FactureServiceImpl implements FactureService {
     private  FactureRepository factureRepository;
 	@Autowired
     private  ReservationRepository reservationRepository;
+    @Autowired
+    private CarsRespository carsRepository;
 	
 
-    public FactureServiceImpl(FactureRepository factureRepository, ReservationRepository reservationRepository) {
+    public FactureServiceImpl(FactureRepository factureRepository, ReservationRepository reservationRepository, CarsRespository carsRepository) {
         this.factureRepository = factureRepository;
         this.reservationRepository = reservationRepository;
+        this.carsRepository = carsRepository;
     }
 
     @Override
@@ -78,6 +83,12 @@ public class FactureServiceImpl implements FactureService {
         Facture savedFacture = factureRepository.save(facture);
         reservation.setStatu("Confirme");
         reservationRepository.save(reservation);
+
+        // set the car as reserved
+        Car car = reservation.getCar();
+        car.setEtat("Reserve");
+        carsRepository.save(car);
+
         return convertToDTO(savedFacture);
     }
 
