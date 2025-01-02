@@ -39,9 +39,9 @@
         <p>Type : {{ car.type }}</p>
         <p>Tarif : {{ car.tarif }} €/jour</p>
         <p>Etat : {{ car.etat }} </p>
-        <button [routerLink]="['/details', car.id]">Détails</button>
+        <button class="details-btn" [routerLink]="['/details', car.id]">Détails</button>
 
-        <button (click)="reserveCar(car)">Réserver</button>
+        <button class="reserv-btn" (click)="reserveCar(car)" *ngIf="car.etat === 'Disponible'">Réserver</button>
       </div>
     </div>
   </div>

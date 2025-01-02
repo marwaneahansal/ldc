@@ -59,23 +59,41 @@
   margin-top: 10px;
 }
 
-.car-card button:first-child {
+// .car-card button:first-child {
+//   background-color: #ff8c66;
+//   color: white;
+// }
+
+// .car-card button:first-child:hover {
+//   background-color: #ff704d;
+// }
+
+.car-card .details-btn {
   background-color: #ff8c66;
   color: white;
 }
 
-.car-card button:first-child:hover {
+.car-card .details-btn:hover {
   background-color: #ff704d;
+  
 }
 
-.car-card button:last-child {
+.car-card .reserv-btn {
   background-color: #ffd700;
-  color: white;
+  color: white;  
 }
 
-.car-card button:last-child:hover {
+.car-card .reserv-btn:hover {
   background-color: #e6c200;
 }
+// .car-card button:last-child {
+//   background-color: #ffd700;
+//   color: white;
+// }
+
+// .car-card button:last-child:hover {
+//   background-color: #e6c200;
+// }
 
 /* Animation pour la rotation des couleurs de la bordure */
 @keyframes borderColorRotate {
