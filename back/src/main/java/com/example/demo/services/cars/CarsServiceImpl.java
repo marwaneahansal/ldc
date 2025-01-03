@@ -101,7 +101,7 @@ public class CarsServiceImpl implements CarsService {
 		}
 
 		if (marque != null && marque != "") {
-			cars = cars.stream().filter(car -> car.getMarque().equals(marque)).collect(Collectors.toList());
+			cars = cars.stream().filter(car -> car.getMarque().toLowerCase().equals(marque.toLowerCase())).collect(Collectors.toList());
 		}
 
 		if (tarif != null && tarif != "") {
