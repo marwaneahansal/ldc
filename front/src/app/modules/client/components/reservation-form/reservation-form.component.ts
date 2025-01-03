@@ -5,6 +5,7 @@ import { ClientService } from '../../service/client.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CarService, Car } from '../../../../services/car.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-reservation-form',
   standalone: true,
@@ -27,7 +28,8 @@ export class ReservationFormComponent implements OnInit {
     private authService: AuthService,
     private carService: ClientService,
     private carService1: CarService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -52,7 +54,7 @@ export class ReservationFormComponent implements OnInit {
     this.errorMessage = '';
     if (this.isStartDateValid()) {
       if (!this.carId || !this.userId) {
-        this.errorMessage = 'Informations utilisateur ou voiture manquantes.';
+        this.toastr.error('Informations utilisateur ou voiture manquantes.', 'Erreur');
         return;
       }
 
@@ -65,16 +67,16 @@ export class ReservationFormComponent implements OnInit {
 
       this.carService.reserveCar(reservationData).subscribe({
         next: (response) => {
-          console.log(response);
-          alert('Réservation réussie! Veillerz attendre la confirmation.');
+          this.toastr.success('Réservation réussie! Veillerz attendre la confirmation.', 'Succès');
+          this.router.navigate(['/client-dashboard/reservations']);
         },
         error: (error) => {
           const message = error.error.message;
-          this.errorMessage = message || 'Une erreur est survenue lors de la réservation.';
+          this.toastr.error(message || 'Une erreur est survenue lors de la réservation.', 'Erreur');
         },
       });
     } else {
-      alert("Veuillez vérifier les dates de réservation.");
+      this.toastr.error('Veuillez vérifier les dates de réservation.', 'Erreur');
     }
   }
 

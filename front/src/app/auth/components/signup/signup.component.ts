@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup,ReactiveFormsModule, FormsModule, Validators } f
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth/auth.service';
 import { HttpClient } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-signup',
   standalone: true,
@@ -22,17 +23,15 @@ export class SignupComponent {
      
     };
   
-    constructor(private authService: AuthService) {}
+    constructor(private authService: AuthService, private toastr: ToastrService) {}
   
     onSubmit() {
       this.authService.registerUser(this.user).subscribe({
         next: (response : any) => {
-          console.log('Utilisateur enregistré avec succès :', response);
-          alert('Inscription réussie!');
+          this.toastr.success('Inscription réussie !', 'Succès');
         },
         error: (err : any) => {
-          console.error('Erreur lors de l\'inscription :', err);
-          alert('Une erreur est survenue. Veuillez réessayer.');
+          this.toastr.error('Une erreur est survenue lors de l\'inscription. Veuillez réessayer.', 'Erreur');
         },
       });
     }

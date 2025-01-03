@@ -10,6 +10,7 @@ import { ListReservationsComponent } from '../list-reservations/list-reservation
 import { ListPaiementComponent } from '../list-paiement/list-paiement.component';
 import { AdminDetailComponent } from '../admin-detail/admin-detail.component';
 import { AuthService } from '../../../../auth/services/auth/auth.service';
+import { LoadingService } from '../../../../services/loading.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -24,18 +25,24 @@ import { AuthService } from '../../../../auth/services/auth/auth.service';
   styleUrl: './admin-dashboard.component.scss',
 })
 export class AdminDashboardComponent implements OnInit {
-  constructor(private clientService: AdminService, private authService: AuthService, private router: Router) {}
+  constructor(private clientService: AdminService, private authService: AuthService, private router: Router, private loadingService: LoadingService) {}
 
   ngOnInit(): void {
+    this.loadingService.show();
     const user = this.authService.getUserInfo();
-    if (!user) {
-      this.router.navigate(['/login']);
-      return;
-    }
+    // if (!user) {
+    //   this.router.navigate(['/login']).then(() => {
+    //     this.loadingService.hide();
+    //   });
+    //   return;
+    // }
     if (user.role !== 'Admin') {
-      this.router.navigate(['/client-dashboard']);
+      this.router.navigate(['/client-dashboard']).then(() => {
+        this.loadingService.hide();
+      });
       return;
     }
+    this.loadingService.hide();
   }
 
   selectedSection: string = 'dashboard'; // Section par défaut

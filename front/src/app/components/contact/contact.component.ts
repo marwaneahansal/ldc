@@ -1,26 +1,26 @@
-
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router'; // Importez RouterModule
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [FormsModule ,CommonModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.scss']
+  styleUrls: ['./contact.component.scss'],
 })
 export class ContactComponent {
+  constructor(private toastr: ToastrService) {}
+
   contact = {
     name: '',
     email: '',
-    message: ''
+    message: '',
   };
 
   envoyerMessage() {
-    console.log('Message envoyé :', this.contact);
-    alert('Votre message a été envoyé avec succès !');
-    // Réinitialisation du formulaire
+    this.toastr.success('Message envoyé avec succès', 'Succès');
     this.contact = { name: '', email: '', message: '' };
   }
 }
