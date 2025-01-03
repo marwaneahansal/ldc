@@ -147,4 +147,19 @@ public class CarsController {
     public CarsDto getCarById(@PathVariable Long id) {
         return carsService.getCarsById(id);
     }
+
+    @GetMapping("/count")
+    public long getTotalCars() {
+        return carsService.getNombreDeVoitures();
+    }
+
+    @GetMapping("/reserve/count")
+    public long getReservedCarsCount() {
+        return carsService.getNombreDeVoituresReservees();
+    }
+
+    @GetMapping("/entretien/count")
+    public long getMaintenanceCarsCount() {
+        return carsService.getNombreDeVoituresEnEntretien();
+    }
 }

@@ -27,7 +27,7 @@
       <label for="signature">Signature numérique</label>
       <canvas id="signatureCanvas" width="400" height="200" style="border: 1px solid #000;"></canvas>
       <button type="button" (click)="clearSignature()">Effacer la signature</button>
-      <input type="file" (change)="uploadSignature($event)" accept="image/*" />
+      <!-- <input type="file" (change)="uploadSignature($event)" accept="image/*"  /> -->
     </div>
 
     <button type="submit" class="btn" [disabled]="!hasAcceptedConditions || !signatureData">

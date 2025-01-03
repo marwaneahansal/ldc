@@ -121,4 +121,16 @@ public class CarsServiceImpl implements CarsService {
 		return CarsDto.fromEntity(car);
 	}
 
+	public long getNombreDeVoitures() {
+		return carsRepository.count();
+	}
+
+	public long getNombreDeVoituresReservees() {
+		return carsRepository.countByEtat("Reserve");
+	}
+
+	public long getNombreDeVoituresEnEntretien() {
+		return carsRepository.countByEtat("En Entretien");
+	}
+
 }

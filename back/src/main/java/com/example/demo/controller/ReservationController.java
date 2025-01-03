@@ -20,6 +20,9 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -63,7 +66,7 @@ public class ReservationController {
 
         List<Reservation> reservations = reservationRepository.findByCarId(reservationRequest.getCarId());
         for (Reservation reservation : reservations) {
-            if (reservation.getStatu().equals("Confirme") || reservation.getStatu().equals("En attente de paiement")) {
+            if (reservation.getStatu().equals("Confirme") || reservation.getStatu().equals("En attente de paiement") || reservation.getStatu().equals("En attente")) {
                 LocalDate reservationStartDate = convertirDateEnLocalDate(reservation.getDate_debut());
                 LocalDate reservationEndDate = convertirDateEnLocalDate(reservation.getDate_fin());
 
@@ -155,4 +158,10 @@ public class ReservationController {
     public long getNombreResrvationDuClientAndstatu(@PathVariable Long id, @PathVariable String statu) {
         return reservationService.getNombreResrvationDuClientAndStatu(id, statu);
     }
+
+    @GetMapping("/{status}/count")
+    public long getReservationParStatus(@PathVariable String status) {
+        return reservationService.getNombreResrvationByStatus(status);
+    }
+    
 }

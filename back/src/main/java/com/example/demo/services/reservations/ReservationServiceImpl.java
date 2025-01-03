@@ -237,4 +237,9 @@ public class ReservationServiceImpl implements ReservationService {
 				.atZone(ZoneId.systemDefault())
 				.toLocalDate();
 	}
+
+	@Override
+	public long getNombreResrvationByStatus(String status) {
+		return reservationRepository.countByStatus(status);
+	}
 }

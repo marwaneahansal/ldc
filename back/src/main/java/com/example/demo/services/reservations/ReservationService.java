@@ -26,4 +26,6 @@ public interface ReservationService {
     Double montontTotal(Long id);
     @Scheduled(cron = "* * * * * ?")
     void mettreAJourStatutReservations();
+
+    long getNombreResrvationByStatus(String status);
 }

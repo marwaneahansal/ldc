@@ -78,6 +78,15 @@ public class ContratsServiceImpl implements ContratsService {
     @Override
     public ContratDao createContrat(Long id) {
         Optional<Reservation> reservationOpt = reservationRepository.findById(id);
+        // check if the contact already exist
+        Contrat contratOpt = contratRepository.findByReservationId(id);
+        if (contratOpt != null) {
+            ContratDao contratDao = new ContratDao();
+            contratDao.setIdContrat(contratOpt.getId());
+            contratDao.setReservation(contratOpt.getReservation());
+            contratDao.setEtat(contratOpt.getEtat());
+            return contratDao;
+        }
         if (reservationOpt.isPresent()) {
             Reservation reservation = reservationOpt.get();
 

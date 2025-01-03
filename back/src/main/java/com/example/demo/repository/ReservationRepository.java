@@ -22,4 +22,8 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 	// get client reservations
 	@Query("SELECT r FROM Reservation r WHERE r.user.id = :clientId")
 	List<Reservation> findByClientId(@Param("clientId") Long clientId);
+
+	// get reservation by status
+	@Query("SELECT COUNT(r) FROM Reservation r WHERE r.statu = :status")
+	long countByStatus(@Param("status") String status);
 }

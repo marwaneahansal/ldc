@@ -11,10 +11,10 @@
       </li>
     </ul>
   </div>
-  <!-- <a href="#" class="btn-download">
+  <a (click)="downloadRapport()" class="btn-download">
     <i class='bx bxs-cloud-download' ></i>
-    <span class="text">Download PDF</span>
-  </a> -->
+    <span class="text">Download Rapport</span>
+  </a>
 </div>
 
 <ul class="box-info">
@@ -39,4 +39,60 @@
     <p>Chiffre d'affaire</p>
     </span>
   </li>
-  </ul>
+  <li>
+    <i class='bx bxs-car'></i>
+    <span class="text">
+    <h3>{{ carsNbr }}</h3>
+    <p>Nombre des vihécules</p>
+    </span>
+  </li>
+  <li>
+    <i class='bx bxs-car-garage'></i>
+    <span class="text">
+    <h3>{{ carsReserve }}</h3>
+    <p>Vihécules Resérvés</p>
+    </span>
+  </li>
+  <li>
+    <i class='bx bxs-car-mechanic'></i>
+    <span class="text">
+    <h3>{{ carsEnEntretien }}</h3>
+    <p>Vihécules En entretien</p>
+    </span>
+  </li>
+  <li>
+    <i class='bx bxs-calendar-check'></i>
+    <span class="text">
+    <h3>{{ reservationEnAttente }}</h3>
+    <p>Reservations en attente</p>
+    </span>
+  </li>
+  <li>
+    <i class='bx bxs-calendar-check'></i>
+    <span class="text">
+    <h3>{{ reservationEnAttentdePaiment }}</h3>
+    <p>Reservations en attente de paiement</p>
+    </span>
+  </li>
+  <li>
+    <i class='bx bxs-calendar-check'></i>
+    <span class="text">
+    <h3>{{ reservationAnnulee }}</h3>
+    <p>Reservations annulées</p>
+    </span>
+  </li>
+  <li>
+    <i class='bx bxs-calendar-check'></i>
+    <span class="text">
+    <h3>{{ reservationConfirme }}</h3>
+    <p>Reservations confirmées</p>
+    </span>
+  </li>
+  <li>
+    <i class='bx bxs-calendar-check'></i>
+    <span class="text">
+    <h3>{{ reservationTerminee }}</h3>
+    <p>Reservations terminées</p>
+    </span>
+  </li>
+</ul>

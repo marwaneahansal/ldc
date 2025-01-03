@@ -30,6 +30,18 @@ export class AdminService {
   getChiffreAffaire(): Observable<number> {
     return this.http.get<number>(this.apiUrl2);
   }
+  getCarsNbr(): Observable<number> {
+    return this.http.get<number>(`${this.api}/cars/count`);
+  }
+  getCarsReserve(): Observable<number> {
+    return this.http.get<number>(`${this.api}/cars/reserve/count`);
+  }
+  getCarsEnEntretien(): Observable<number> {
+    return this.http.get<number>(`${this.api}/cars/entretien/count`);
+  }
+  getReservationByStatus(status: string): Observable<number> {
+    return this.http.get<number>(`${this.api}/reservations/${status}/count`);
+  }
 
   ///////////  Les Clients ///////////////////
 

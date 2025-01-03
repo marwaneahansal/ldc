@@ -21,4 +21,8 @@ public interface CarsService {
 	// Méthode pour récupérer une voiture par ID
 	CarsDto getCarsById(Long id);
 
+	long getNombreDeVoitures();
+	long getNombreDeVoituresReservees();
+	long getNombreDeVoituresEnEntretien();
+
 }
