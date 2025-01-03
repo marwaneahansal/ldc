@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router'; // Importez RouterModule
 import { AuthService } from '../../auth/services/auth/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-car-list',
@@ -25,7 +26,8 @@ export class CarListComponent implements OnInit {
 
   constructor(private carService: CarService,
     private authService: AuthService, // Injectez AuthService
-    private router: Router // Injectez Router pour naviguer
+    private router: Router, // Injectez Router pour naviguer
+    private toastr: ToastrService
   ) {}
   isAuthenticated = false; // Indicateur d'authentification
   ngOnInit(): void {

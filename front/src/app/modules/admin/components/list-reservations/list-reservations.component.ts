@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminService } from '../../services/admin.service';
 import { ReservationModele } from '../../modele/reservation.modele.model';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-list-reservations',
   standalone: true,
@@ -12,7 +13,7 @@ import { ReservationModele } from '../../modele/reservation.modele.model';
 export class ListReservationsComponent implements OnInit {
   reservations: ReservationModele[] = []; // Liste des réservations
 
-  constructor(private reservationService: AdminService) {}
+  constructor(private reservationService: AdminService, private toastr: ToastrService) {}
 
   // Initialisation : Charger les réservations
   ngOnInit(): void {
@@ -43,13 +44,11 @@ export class ListReservationsComponent implements OnInit {
   confirmReservation(reservationId: number): void {
     this.reservationService.confirmReservation(reservationId).subscribe({
       next: (data) => {
-        console.log('Réservation confirmée avec succès');
+        this.toastr.success('Réservation confirmée avec succès', 'Succès');
         this.getReservations();
-        alert("Réservation confirmée avec succès, en attente de paiement");
       },
       error: (error) => {
-        console.error('Erreur lors de la confirmation de la réservation:', error);
-        alert("Erreur lors de la confirmation de la réservation");
+        this.toastr.error("Erreur lors de la confirmation de la réservation", "Erreur");
       }
     })
   }
@@ -57,13 +56,11 @@ export class ListReservationsComponent implements OnInit {
   annulerReservation(reservationId: number): void {
     this.reservationService.annulerReservation(reservationId).subscribe({
       next: (data) => {
-        console.log('Réservation anulée avec succès');
+        this.toastr.success('Réservation annulée avec succès', 'Succès');
         this.getReservations();
-        alert("Réservation anulée avec succès");
       },
       error: (error) => {
-        console.error("Erreur lors de l'annulation de la réservation:", error);
-        alert("Erreur lors de l'annulation de la réservation");
+        this.toastr.error("Erreur lors de l'annulation de la réservation", "Erreur");
       }
     })
   }
@@ -71,13 +68,11 @@ export class ListReservationsComponent implements OnInit {
   retorunerReservation(reservationId: number): void {
     this.reservationService.retournerReservation(reservationId).subscribe({
       next: (data) => {
-        console.log('Réservation retournée avec succès');
+        this.toastr.success('Réservation retournée avec succès', 'Succès');
         this.getReservations();
-        alert("Réservation retournée avec succès");
       },
       error: (error) => {
-        console.error('Erreur lors de la retournement de la réservation:', error);
-        alert("Erreur lors de la retournement de la réservation");
+        this.toastr.error("Erreur lors de la retournement de la réservation", "Erreur");
       }
     })
   }
@@ -89,13 +84,10 @@ export class ListReservationsComponent implements OnInit {
         this.reservations = this.reservations.filter(
           (res) => res.id_reservation !== id
         );
-        console.log('Réservation supprimée avec succès');
+        this.toastr.success('Réservation supprimée avec succès', 'Succès');
       },
       error: (error) => {
-        console.error(
-          'Erreur lors de la suppression de la réservation:',
-          error
-        );
+        this.toastr.error("Erreur lors de la suppression de la réservation", "Erreur");
       },
     });
   }

@@ -91,9 +91,6 @@ export class ConfirmationComponent {
     }
     this.reservationService.confirmReservation(reservationId,this.signatureData).subscribe({
       next: () => {
-        alert(
-          "Votre réservation est confirmée ! Un contrat a été généré et envoyé à votre adresse email."
-        );
         this.router.navigate(['/payment',reservationId]);
       },
       error: (err) => {

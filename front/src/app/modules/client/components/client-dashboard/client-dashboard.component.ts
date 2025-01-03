@@ -8,6 +8,7 @@ import { ClientDetailComponent } from '../client-detail/client-detail.component'
 import { ListClientReservationComponent } from '../list-client-reservation/list-client-reservation.component';
 import { ListClientPaymentsComponent } from '../list-client-payments/list-client-payments.component';
 import { Router, RouterModule } from '@angular/router';
+import { LoadingService } from '../../../../services/loading.service';
 @Component({
   selector: 'app-client-dashboard',
   standalone: true,
@@ -21,30 +22,33 @@ import { Router, RouterModule } from '@angular/router';
   styleUrl: './client-dashboard.component.scss',
 })
 export class ClientDashboardComponent implements OnInit {
-  isLoading: boolean = false;
   userId: number | null = null; // ID de l'utilisateur
   errorMessage = '';
 
   constructor(
     private clientService: ClientService,
     private authService: AuthService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private loadingService: LoadingService
+  ) {
+  }
 
   ngOnInit(): void {
-    this.isLoading = true;
+    this.loadingService.show();
     const user = this.authService.getUserInfo();
-    if (!user) {
-      this.router.navigate(['/login']);
-      this.isLoading = false;
+    if (user && user.role !== 'Client') {
+      this.router.navigate(['/admin-dashboard']).then(() => {
+        this.loadingService.hide();
+      });
       return;
     }
-    if (user.role !== 'Client') {
-      this.router.navigate(['/admin-dashboard']);
-      this.isLoading = false;
-      return;
-    }
-    this.isLoading = false;
+    // if (!user) {
+    //   this.router.navigate(['/login']).then(() => {
+    //     this.loadingService.hide();
+    //   });
+    //   return;
+    // }
+    this.loadingService.hide();
   }
 
   selectedSection: string = 'dashboard'; // Section par défaut
