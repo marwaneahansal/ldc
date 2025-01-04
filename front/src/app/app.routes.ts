@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
-import { AppComponent  } from './app.component';
+import { AppComponent } from './app.component';
 import { SignupComponent } from './auth/components/signup/signup.component';
 import { LoginComponent } from './auth/components/login/login.component';
 import { AccueilComponent } from './accueil/accueil.component';
-import {AboutComponent} from './about/about.component';
-import {AdminDashboardComponent} from './modules/admin/components/admin-dashboard/admin-dashboard.component';
-import {ClientDashboardComponent} from './modules/client/components/client-dashboard/client-dashboard.component';
+import { AboutComponent } from './about/about.component';
+import { AdminDashboardComponent } from './modules/admin/components/admin-dashboard/admin-dashboard.component';
+import { ClientDashboardComponent } from './modules/client/components/client-dashboard/client-dashboard.component';
 
 import { CarListComponent } from './components/car-list/car-list.component';
 import { CarDetailComponent } from './components/car-detail/car-detail.component';
@@ -25,32 +25,42 @@ import { ListReservationsComponent } from './modules/admin/components/list-reser
 import { ListPaiementComponent } from './modules/admin/components/list-paiement/list-paiement.component';
 import { AdminHomeComponent } from './modules/admin/components/admin-home/admin-home.component';
 export const routes: Routes = [
- // { path: '', redirectTo: '/accueil', pathMatch: 'full' }, 
- { path: '', redirectTo: '/accueil', pathMatch: 'full' }, // Redirection par défaut
-  {path:"signup",component: SignupComponent},
-  {path:"login",component: LoginComponent},
-  {path:"accueil",component:AccueilComponent},
+  // { path: '', redirectTo: '/accueil', pathMatch: 'full' },
+  { path: '', redirectTo: '/accueil', pathMatch: 'full' }, // Redirection par défaut
+  { path: 'accueil', component: AccueilComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'reservation', component: CarListComponent },
+  { path: 'details/:id', component: CarDetailComponent },
+  { path: 'conditions', component: RentalConditionsComponent },
+  { path: 'contact', component: ContactComponent },
+
+  { path: 'signup', component: SignupComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'reservation-form/:id', component: ReservationFormComponent },
+  
+  { path: 'confirmer/:id', component: ConfirmationComponent },
+  { path: 'payment/:id', component: PaymentComponent },
   {
     path: 'client-dashboard',
     component: ClientDashboardComponent,
     children: [
       {
         path: '',
-        component: ClientHomeComponent
+        component: ClientHomeComponent,
       },
       {
         path: 'details',
-        component: ClientDetailComponent
+        component: ClientDetailComponent,
       },
       {
         path: 'reservations',
-        component: ListClientReservationComponent
+        component: ListClientReservationComponent,
       },
       {
         path: 'payments',
-        component: ListClientPaymentsComponent
-      }
-    ]
+        component: ListClientPaymentsComponent,
+      },
+    ],
   },
   {
     path: 'admin-dashboard',
@@ -65,7 +75,7 @@ export const routes: Routes = [
         component: AdminDetailComponent,
       },
       {
-        path: "clients",
+        path: 'clients',
         component: ListClientsComponent,
       },
       {
@@ -79,19 +89,7 @@ export const routes: Routes = [
       {
         path: 'paiements',
         component: ListPaiementComponent,
-      }
-    ]
+      },
+    ],
   },
- 
-  {path: 'about',component: AboutComponent},
-  {path:'reservation',component:CarListComponent},
-  { path: 'details/:id', component: CarDetailComponent },
-  { path: 'conditions', component: RentalConditionsComponent },
-  { path: 'contact', component: ContactComponent },
-  // { path: 'admin-dashboard', component: AdminDashboardComponent },
-  // { path: 'client-dashboard', component: ClientDashboardComponent },
-  { path: 'reservation-form/:id', component: ReservationFormComponent },
-  { path: 'confirmer/:id', component: ConfirmationComponent },
-  { path: 'payment/:id', component: PaymentComponent },
-
 ];

@@ -1,52 +1,91 @@
-<div class="cars-section">
-    <h2>Nos Voitures</h2>
-  
-    <!-- Formulaire de recherche -->
-    <form class="search-form" (ngSubmit)="searchCars()">
-      <label for="date">Date :</label>
-      <input type="date" [(ngModel)]="searchFilters.date" name="date" />
-  
-      <label for="type">Type :</label>
-      <select [(ngModel)]="searchFilters.type" name="type">
-        <option value="">Tous</option>
-        <option value="SUV">SUV</option>
-        <option value="Berline">Berline</option>
-        <option value="Coupé">Coupé</option>
-        <option value="Hatchback">Hatchback</option>
-        <option value="Pickup">Pickup</option>
-      </select>
-      <label for="type">Etat :</label>
-      <select [(ngModel)]="searchFilters.etat" name="etat">
-        <option value="">Tous</option>
-        <option value="Disponible">Disponible</option>
-        <option value="En Entretien">En entretien</option>
-        <option value="Reserve">Reservee</option>
-        
-      </select>
-  
-      <label for="brand">Marque :</label>
-      <input type="text" [(ngModel)]="searchFilters.marque" name="brand" placeholder="Marque" />
-  
-      <label for="price">Tarif Max (€) :</label>
-      <input type="number" [(ngModel)]="searchFilters.tarif" name="price" placeholder="Tarif" />
-  
-      <button type="submit">Rechercher</button>
-    </form>
-  
-    <!-- Liste des voitures -->
-    <div class="cars-list">
-      <div *ngFor="let car of filteredCars" class="car-card">
-        <img [src]="car.image" [alt]="car.marque + ' ' + car.modele" />
-        <h3>{{ car.marque }} {{ car.modele }}</h3>
-        <p>Année : {{ car.annee }}</p>
-        <p>Type : {{ car.type }}</p>
-        <p>Tarif : {{ car.tarif }} €/jour</p>
-        <p>Etat : {{ car.etat }} </p>
-        <button class="details-btn" [routerLink]="['/details', car.id]">Détails</button>
+<section class="container mx-auto p-4 my-10">
+  <h2 class="font-bold text-3xl text-black mb-8">Réserver une voiture</h2>
+  <div class="flex flex-col mb-4">
+    <div class="rounded-xl border border-gray-100 bg-white p-6">
+      <form class="" (ngSubmit)="searchCars()">
+        <div class="relative mb-10 w-full flex  items-center justify-between rounded-md">
+          <svg class="absolute left-2 block h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8" class=""></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65" class=""></line>
+          </svg>
+          <input [(ngModel)]="searchFilters.marque" type="text" name="marque" class="h-12 w-full cursor-text rounded-md border border-gray-100 bg-gray-100 py-4 pr-40 pl-12 shadow-sm outline-none focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50" placeholder="Rechercher par marque" />
+        </div>
 
-        <!-- *ngIf="car.etat === 'Disponible'" -->
-        <button class="reserv-btn" (click)="reserveCar(car)">Réserver</button>
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div class="flex flex-col">
+            <label for="date" class="text-sm font-medium text-stone-600">Date</label>
+            <input [(ngModel)]="searchFilters.date" name="date" type="date" id="date" class="mt-2 block w-full cursor-pointer rounded-md border border-gray-100 bg-gray-100 px-2 py-2 shadow-sm outline-none focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50" />
+          </div>
+          
+          <div class="flex flex-col">
+            <label for="type" class="text-sm font-medium text-stone-600">Type</label>
+
+            <select [(ngModel)]="searchFilters.type" name="type" id="type" class="mt-2 block w-full rounded-md border border-gray-100 bg-gray-100 px-2 py-2 shadow-sm outline-none focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+              <option value="">Tous</option>
+              <option value="SUV">SUV</option>
+              <option value="Berline">Berline</option>
+              <option value="Coupé">Coupé</option>
+              <option value="Hatchback">Hatchback</option>
+              <option value="Pickup">Pickup</option>
+            </select>
+          </div>
+
+          <div class="flex flex-col">
+            <label for="etat" class="text-sm font-medium text-stone-600">Etat</label>
+
+            <select [(ngModel)]="searchFilters.etat" name="etat" id="etat" class="mt-2 block w-full cursor-pointer rounded-md border border-gray-100 bg-gray-100 px-2 py-2 shadow-sm outline-none focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+              <option value="">Tous</option>
+              <option value="Disponible">Disponible</option>
+              <option value="En Entretien">En entretien</option>
+              <option value="Reserve">Reservee</option>
+            </select>
+          </div>
+
+          <div class="flex flex-col">
+            <label for="tarif" class="text-sm font-medium text-stone-600">Tarif Max</label>
+            <input [(ngModel)]="searchFilters.tarif" name="tarif" type="number" id="tarif" placeholder="200" class="mt-2 block w-full rounded-md border border-gray-100 bg-gray-100 px-2 py-2 shadow-sm outline-none focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50" />
+          </div>
+
+        </div>
+
+        <div class="mt-6 grid w-full grid-cols-2 justify-end space-x-4 md:flex">
+          <button class="rounded-lg bg-gray-200 px-8 py-2 font-medium text-gray-700 outline-none hover:opacity-80 focus:ring" type="reset" (click)="resetResults()">Reset</button>
+          <button class="rounded-lg bg-blue-600 px-8 py-2 font-medium text-white outline-none hover:opacity-80 focus:ring" type="submit">Search</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-3 gap-8">
+    <div *ngFor="let car of filteredCars" class="max-w-[400px] mx-auto">
+      <div class="w-full max-w-sm aspect-square">
+        <img [src]="car.image" [alt]="car.marque + ' ' + car.modele " class="w-full h-full rounded-xl object-cover">
+      </div>
+      <div class="mt-2">
+        <div class="flex items-center justify-between">
+          <h6 class="font-medium text-xl leading-8 text-black mb-2 truncate max-w-[60%]">{{ car.marque }} {{ car.modele }}</h6>
+          <h6 class="font-semibold text-xl leading-8 text-blue-500">{{ car.tarif }} MAD/Jour</h6>
+        </div>
+          <p class="text-gray-900 text-base mt-0">{{ car.type }} - {{ car.annee }}</p>
+          <p class="text-gray-900 text-lg mt-1 font-semibold" [ngClass]="car.etat === 'Disponible' ? 'text-green-500' : 'text-red-500'">{{ car.etat }}</p>
+          <div class="flex items-center mt-2 flex-wrap gap-2">
+            <button
+              (click)="reserveCar(car)"
+              class="px-4 py-2 rounded-lg text-white bg-blue-500 border border-blue-500 flex items-center justify-center group shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-200 hover:border-blue-600 hover:bg-blue-600">
+              Réserver
+            </button>
+            <button
+              [routerLink]="['/details', car.id]"
+              class="px-4 py-2 rounded-lg bg-white border border-blue-500 flex items-center justify-center group shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-200 hover:border-gray-400 hover:bg-gray-50">
+              Détails
+            </button>
+          </div>
       </div>
     </div>
   </div>
+
+  <div class="w-full items-center" *ngIf="!isLoading && filteredCars.length === 0">
+    <p class="text-2xl text-center">Aucun résultat trouvé</p>
+  </div>
+</section>
  

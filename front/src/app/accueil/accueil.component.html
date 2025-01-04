@@ -1,28 +1,31 @@
 <div class="body">
-  <section class="home">
-    <div class="home-container">
-      <h1>Location Voiture</h1>
-      <h3>Bienvenue sur notre site</h3>
-      <p>Nous sommes une entreprise de location de voitures offrant des véhicules fiables et adaptés à tous les besoins, avec un service rapide, flexible et abordable.</p>
-      <a href="#" class="btn">Reserver</a>
+  <section class="pt-12 bg-gray-50 sm:pt-16">
+    <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="text-center">
+            <p
+                class="max-w-4xl mx-auto mb-4 text-4xl font-bold leading-tight text-gray-900 sm:leading-tight sm:text-5xl lg:text-6xl lg:leading-tight">
+                Location Des Voiture
+            </p>
+            <h1 class="max-w-2xl mx-auto px-6 text-lg text-gray-600 font-inter">
+              Nous sommes une entreprise de location de voitures offrant des véhicules fiables et adaptés à tous les besoins, avec un service rapide, flexible et abordable.
+            </h1>
+            <div class="px-8 sm:items-start sm:justify-center sm:px-0 sm:space-x-5 sm:flex mt-9">
+                <a [routerLink]="'/reservation'" title="Réserver Maintenant"
+                    class="mb-3 sm:mb-0 inline-flex items-center justify-center w-full px-4 py-3 text-lg font-bold text-white transition-all duration-200 bg-blue-500 border-2 border-transparent sm:w-auto rounded-xl hover:bg-blue-600"
+                    role="button">
+                    Réserver Maintenant
+                </a>
+            </div>
+        </div>
     </div>
-   
-  
-    <div class="home-img">
-      <div class="rhombus">
-       <img src="assets/car.png" alt="car">
-      </div>
+    <div class="bg-white">
+        <div class="relative mx-auto mt-4 md:mt-8">
+            <div class="lg:max-w-full lg:mx-auto h-[50vh]" style="background-image: url('/assets/hero.jpg'); background-size: cover; background-position: center;">
+            </div>
+        </div>
     </div>
-  
-    <div class="rhombus2"></div>
   </section>
-  
-  <br><br>
-  
   <app-about></app-about>
-  
-  <br><br>
   <app-car-list></app-car-list>
-  <br><br>
   <app-contact></app-contact>
 </div>
