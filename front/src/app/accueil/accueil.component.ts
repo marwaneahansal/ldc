@@ -1,18 +1,16 @@
 import { Component } from '@angular/core';
-import {AboutComponent} from '../about/about.component';
-import {CarListComponent} from '../components/car-list/car-list.component';
+import { AboutComponent } from '../about/about.component';
+import { CarListComponent } from '../components/car-list/car-list.component';
 import { ContactComponent } from '../components/contact/contact.component';
 import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-accueil',
   standalone: true,
-  imports: [AboutComponent,CarListComponent,ContactComponent, RouterModule],
+  imports: [AboutComponent, CarListComponent, ContactComponent, RouterModule],
   templateUrl: './accueil.component.html',
-  styleUrl: './accueil.component.scss'
+  styleUrl: './accueil.component.scss',
 })
-export class AccueilComponent {
-
-}
+export class AccueilComponent {}
 
 /*import { Component, OnInit } from '@angular/core';
 

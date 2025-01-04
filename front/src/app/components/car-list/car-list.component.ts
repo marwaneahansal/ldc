@@ -57,6 +57,17 @@ export class CarListComponent implements OnInit {
     });
   }
 
+  resetResults(): void {
+    this.filteredCars = this.cars;
+    this.searchFilters = {
+      date: '',
+      type: '',
+      marque: '',
+      etat:'',
+      tarif: null,
+    };
+  }
+
   viewDetails(car: Car): void {
     alert(`Détails de la voiture : ${car.marque} ${car.modele}`);
   }
