@@ -1,54 +1,35 @@
-<div class="contact-page-container">
-  <h2 class="contact-title">Contactez-nous</h2>
-  <div class="contact-page">
-    <!-- Coordonnées -->
-    <div class="contact-info">
-      <p><strong>Email :</strong> <a href="mailto:contact&#64;locationvoiture.com">contact&#64;locationvoiture.com</a></p>
-      <p><strong>Téléphone :</strong> +33 1 23 45 67 89</p>
-      <p><strong>Adresse :</strong> 123 Rue de la Location, Paris, France</p>
+<section class="container mx-auto my-10 p-4">
+  <div class="grid grid-cols-4 text-gray-800 lg:grid-cols-3 border border-gray-100">
+    <div class="col-span-4 bg-gray-50 px-8 py-10 text-gray-800 md:col-span-2 md:border-r md:px-10 md:py-12 lg:col-span-1">
+      <h2 class="mb-8 text-2xl">Contactez-nous</h2>
+      <div>
+        <div class="mb-6 flex items-center text-left">
+          <i class='bx bx-envelope text-xl'></i>
+          <p class="text-base md:text-lg mb-0 ml-2">contact&#64;locationvoiture.com</p>
+        </div>
+        <div class="my-6 flex items-center text-left">
+          <i class='bx bx-phone text-xl'></i>
+          <p class="text-base md:text-lg mb-0 ml-2">+212 6 00 00 67 89</p>
+        </div>
+        <div class="my-6 flex items-center text-left">
+          <i class='bx bx-map text-xl'></i>
+          <p class="text-base md:text-lg mb-0 ml-2">Khouribga, rue Mohammed V, Maroc</p>
+        </div>
+      </div>
     </div>
-
-    <!-- Formulaire de contact -->
-    <form (ngSubmit)="envoyerMessage()" #contactForm="ngForm" class="contact-form">
-      <div class="form-group">
-        <label for="name">Nom :</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          class="form-control"
-          required
-          [(ngModel)]="contact.name"
-        />
-      </div>
-
-      <div class="form-group">
-        <label for="email">Email :</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          class="form-control"
-          required
-          [(ngModel)]="contact.email"
-        />
-      </div>
-
-      <div class="form-group">
-        <label for="message">Message :</label>
-        <textarea
-          id="message"
-          name="message"
-          class="form-control"
-          rows="5"
-          required
-          [(ngModel)]="contact.message"
-        ></textarea>
-      </div>
-
-      <button type="submit" class="btn btn-primary" [disabled]="!contactForm.valid">
-        Envoyer
-      </button>
-    </form>
+    <div class="order-first col-span-4 max-w-screen-md px-8 py-10 md:order-last md:col-span-2 md:px-10 md:py-12">
+      <h2 class="mb-8 text-2xl">Envoyez-nous un message</h2>
+      <form (ngSubmit)="envoyerMessage()" #contactForm="ngForm">
+        <div class="md:col-gap-4 mb-5 grid md:grid-cols-2">
+          <input class="col-span-1 w-full border-b py-3 text-sm outline-none focus:border-b-2 focus:border-black" type="text" placeholder="Name" name="name" [(ngModel)]="contact.name" required />
+          <input class="col-span-1 w-full border-b py-3 text-sm outline-none focus:border-b-2 focus:border-black" type="email" placeholder="Email" name="email" [(ngModel)]="contact.email" />
+        </div>
+        <textarea class="mb-10 w-full resize-y whitespace-pre-wrap border-b py-3 text-sm outline-none focus:border-b-2 focus:border-black" id="" rows="6" placeholder="message" name="message" [(ngModel)]="contact.message"></textarea>
+        <button [disabled]="!contactForm.valid" type="submit" class="group flex cursor-pointer items-center rounded-xl bg-blue-600 bg-none px-4 py-3 text-center font-semibold leading-tight text-white">
+          Envoyer
+          <svg class="group-hover:ml-8 ml-4 transition-all" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.912 12H4L2.023 4.135A.662.662 0 0 1 2 3.995c-.022-.721.772-1.221 1.46-.891L22 12L3.46 20.896c-.68.327-1.464-.159-1.46-.867a.66.66 0 0 1 .033-.186L3.5 15" /></svg>
+        </button>
+      </form>
+    </div>
   </div>
-</div>
+</section>

@@ -30,8 +30,10 @@ export class CarListComponent implements OnInit {
     private toastr: ToastrService
   ) {}
   isAuthenticated = false; // Indicateur d'authentification
+  isLoading: boolean = false;
   ngOnInit(): void {
     // Charger toutes les voitures
+    this.isLoading = true;
     this.carService.getCars().subscribe((data) => {
       this.cars = data;
       this.filteredCars = data;
@@ -39,6 +41,7 @@ export class CarListComponent implements OnInit {
     this.authService.user$.subscribe((user) => {
       this.isAuthenticated = !!user; // Est vrai si l'utilisateur est connecté
     });
+    this.isLoading = false;
   }
   
 

@@ -1,4 +1,4 @@
-<div class="confirmation-container">
+<div class="confirmation-container mt-10">
   <h1>Confirmation de Réservation</h1>
   <p>
     Merci de confirmer votre réservation en acceptant nos 
@@ -25,8 +25,8 @@
     <!-- Champ pour la signature -->
     <div class="signature-container">
       <label for="signature">Signature numérique</label>
-      <canvas id="signatureCanvas" width="400" height="200" style="border: 1px solid #000;"></canvas>
-      <button type="button" (click)="clearSignature()">Effacer la signature</button>
+      <canvas class="mx-auto" id="signatureCanvas" width="400" height="200" style="border: 1px solid #000;"></canvas>
+      <button class="mb-2" type="button" (click)="clearSignature()">Effacer la signature</button>
       <!-- <input type="file" (change)="uploadSignature($event)" accept="image/*"  /> -->
     </div>
 

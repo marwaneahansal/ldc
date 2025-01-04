@@ -70,7 +70,7 @@
           <p class="text-gray-900 text-lg mt-1 font-semibold" [ngClass]="car.etat === 'Disponible' ? 'text-green-500' : 'text-red-500'">{{ car.etat }}</p>
           <div class="flex items-center mt-2 flex-wrap gap-2">
             <button
-            (click)="reserveCar(car)"
+              (click)="reserveCar(car)"
               class="px-4 py-2 rounded-lg text-white bg-blue-500 border border-blue-500 flex items-center justify-center group shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-200 hover:border-blue-600 hover:bg-blue-600">
               Réserver
             </button>
@@ -84,56 +84,8 @@
     </div>
   </div>
 
-  <div class="w-full items-center" *ngIf="filteredCars.length === 0">
+  <div class="w-full items-center" *ngIf="!isLoading && filteredCars.length === 0">
     <p class="text-2xl text-center">Aucun résultat trouvé</p>
   </div>
 </section>
-<!-- <div class="cars-section">
-    <h2>Nos Voitures</h2>
-  
-    <form class="search-form" (ngSubmit)="searchCars()">
-      <label for="date">Date :</label>
-      <input type="date" [(ngModel)]="searchFilters.date" name="date" />
-  
-      <label for="type">Type :</label>
-      <select [(ngModel)]="searchFilters.type" name="type">
-        <option value="">Tous</option>
-        <option value="SUV">SUV</option>
-        <option value="Berline">Berline</option>
-        <option value="Coupé">Coupé</option>
-        <option value="Hatchback">Hatchback</option>
-        <option value="Pickup">Pickup</option>
-      </select>
-      <label for="type">Etat :</label>
-      <select [(ngModel)]="searchFilters.etat" name="etat">
-        <option value="">Tous</option>
-        <option value="Disponible">Disponible</option>
-        <option value="En Entretien">En entretien</option>
-        <option value="Reserve">Reservee</option>
-        
-      </select>
-  
-      <label for="brand">Marque :</label>
-      <input type="text" [(ngModel)]="searchFilters.marque" name="brand" placeholder="Marque" />
-  
-      <label for="price">Tarif Max (€) :</label>
-      <input type="number" [(ngModel)]="searchFilters.tarif" name="price" placeholder="Tarif" />
-  
-      <button type="submit">Rechercher</button>
-    </form>
-  
-    <div class="cars-list">
-      <div *ngFor="let car of filteredCars" class="car-card">
-        <img [src]="car.image" [alt]="car.marque + ' ' + car.modele" />
-        <h3>{{ car.marque }} {{ car.modele }}</h3>
-        <p>Année : {{ car.annee }}</p>
-        <p>Type : {{ car.type }}</p>
-        <p>Tarif : {{ car.tarif }} €/jour</p>
-        <p>Etat : {{ car.etat }} </p>
-        <button class="details-btn" [routerLink]="['/details', car.id]">Détails</button>
-
-        <button class="reserv-btn" (click)="reserveCar(car)">Réserver</button>
-      </div>
-    </div>
-  </div> -->
  

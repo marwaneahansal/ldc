@@ -1,46 +1,37 @@
-<div class="reservation-container">
+<div class="container mx-auto my-5 p-4">
+  <div  *ngIf="car"  class="border border-gray-100 p-8 rounded-lg">
     <h1>Réserver une voiture</h1>
-    <div class="container">
-      <!-- Section des détails de la voiture -->
-      <div *ngIf="car" class="car-detail">
-        <h2>{{ car.marque }} {{ car.modele }}</h2>
-        <img [src]="car.image" [alt]="car.marque + ' ' + car.modele" />
-        <p><strong>Type :</strong> {{ car.type }}</p>
-        <p><strong>Année :</strong> {{ car.annee }}</p>
-        <p><strong>Tarif :</strong> {{ car.tarif }} €/jour</p>
-      </div>
-  
-      <!-- Formulaire de réservation -->
-      <div class="reservation-form">
-        <form (ngSubmit)="submitReservation()">
-          <div class="form-group">
-            <label for="dateDebut">Date de début :</label>
-            <input
-              type="date"
-              id="date_debut"
-              [(ngModel)]="reservation.date_debut"
-              name="date_debut"
-              required
-            />
+    <div class="flex items-start gap-8 mt-4">
+      <div class="">
+        <div class="w-full max-w-sm aspect-square">
+          <img [src]="car.image" [alt]="car.marque + ' ' + car.modele " class="w-full h-full rounded-xl object-cover">
+        </div>
+        <div class="mt-2">
+          <div class="flex items-center justify-between">
+            <h6 class="font-medium text-xl leading-8 text-black mb-2 truncate max-w-[60%]">{{ car.marque }} {{ car.modele }}</h6>
+            <h6 class="font-semibold text-xl leading-8 text-blue-500">{{ car.tarif }} MAD/Jour</h6>
           </div>
-  
-          <div class="form-group">
-            <label for="dateFin">Date de fin :</label>
-            <input
-              type="date"
-              id="date_fin"
-              [(ngModel)]="reservation.date_fin"
-              name="date_fin"
-              [min]="today"
-              required
-            />
-          </div>
-  
-          <button type="submit" class="btn">Réserver</button>
-        </form>
-        <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+            <p class="text-gray-900 text-base mt-0">{{ car.type }} - {{ car.annee }}</p>
+        </div>
       </div>
+      
+      <form class="flex-grow relative space-y-3 bg-white pt-0 mt-0 p-6 lg:p-10 m-10" (ngSubmit)="submitReservation()">
+        <p class="pb-4 text-gray-700">Réserver la voiture {{ car.marque }} {{ car.modele }}</p>
+      
+        <div>
+          <label class="" for="date_debut"> Date de début: </label>
+          <input [(ngModel)]="reservation.date_debut" required id="date_debut" type="date" name="date_debut" class="mt-2 h-12 w-full rounded-md bg-gray-100 px-3 outline-none focus:ring" />
+        </div>
+        <div>
+          <label class="" for="date_fin"> Date de fin: </label>
+          <input [(ngModel)]="reservation.date_fin" required id="date_fin" type="date" name="date_fin" class="mt-2 h-12 w-full rounded-md bg-gray-100 px-3 outline-none focus:ring" />
+        </div>
+      
+        <div class="mb-2">
+          <button type="submit" class="mt-5 w-full rounded-md bg-blue-600 p-2 text-center font-semibold text-white outline-none focus:ring">Réserver</button>
+        </div>
+        <p *ngIf="errorMessage" class="text-center text-red-600">{{ errorMessage }}</p>
+      </form>      
     </div>
   </div>
-  
-  
+</div>

@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CarService, Car } from '../../../../services/car.service';
 import { ToastrService } from 'ngx-toastr';
+import { LoadingService } from '../../../../services/loading.service';
 @Component({
   selector: 'app-reservation-form',
   standalone: true,
@@ -29,15 +30,18 @@ export class ReservationFormComponent implements OnInit {
     private carService: ClientService,
     private carService1: CarService,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private loadingService: LoadingService
   ) {}
 
   ngOnInit(): void {
     // Récupérer l'ID de la voiture depuis les paramètres de l'URL
+    this.loadingService.show();
     this.carId = +this.route.snapshot.paramMap.get('id')!;
     const carId = this.route.snapshot.params['id'];
     this.carService1.getCarById(carId).subscribe((data) => {
       this.car = data;
+      this.loadingService.hide();
     });
 
     // Récupérer l'utilisateur connecté
