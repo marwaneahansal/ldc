@@ -1,78 +1,78 @@
 
 
-/* Partie 1: Header */
-.app-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  color: #fff;
-  position:fixed;
-  width: 100%;
-  top: 0;
-  z-index: 1000;
-  box-sizing: border-box; /* Inclut les marges et les bordures dans la largeur totale */
+// /* Partie 1: Header */
+// .app-header {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   padding: 10px 20px;
+//   color: #fff;
+//   position:fixed;
+//   width: 100%;
+//   top: 0;
+//   z-index: 1000;
+//   box-sizing: border-box; /* Inclut les marges et les bordures dans la largeur totale */
 
-}
+// }
 
 .logo-container img {
-  width: 100px; /* Ajustez selon la taille de votre logo */
+  // width: 100px; /* Ajustez selon la taille de votre logo */
   animation: slideRight 1s ease forwards;
 }
 
-.navbar {
-  display: flex;
-  gap: 20px;
-}
+// .navbar {
+//   display: flex;
+//   gap: 20px;
+// }
 
-.navbar a {
-  color: black;
-  text-decoration: none;
-  font-size: 16px;
-  text-transform: uppercase;
-  font-weight: bold;
-  opacity: 0;
-  animation: slideTop .5s ease forwards;
-  animation-delay: calc(.2s * var(--i));
-  display: inline-block;
+// .navbar a {
+//   color: black;
+//   text-decoration: none;
+//   font-size: 16px;
+//   text-transform: uppercase;
+//   font-weight: bold;
+//   opacity: 0;
+//   animation: slideTop .5s ease forwards;
+//   animation-delay: calc(.2s * var(--i));
+//   display: inline-block;
  
-}
+// }
 
-.navbar a:hover {
-  color: #007bff;
-}
+// .navbar a:hover {
+//   color: #007bff;
+// }
 
-/* Partie 1: Auth buttons */
-.auth-buttons {
-  display: flex;
-  gap: 15px;
-  justify-content: flex-end;
-  flex-wrap: nowrap; /* Évite de faire défiler les boutons sur plusieurs lignes */
-  max-width: 100%; /* Empêche le débordement horizontal */
-  padding-right: 20px; /* Donne un peu d'espace supplémentaire à droite */
-  box-sizing: border-box; /* Inclut la bordure et la marge dans le calcul de la largeur */
-}
+// /* Partie 1: Auth buttons */
+// .auth-buttons {
+//   display: flex;
+//   gap: 15px;
+//   justify-content: flex-end;
+//   flex-wrap: nowrap; /* Évite de faire défiler les boutons sur plusieurs lignes */
+//   max-width: 100%; /* Empêche le débordement horizontal */
+//   padding-right: 20px; /* Donne un peu d'espace supplémentaire à droite */
+//   box-sizing: border-box; /* Inclut la bordure et la marge dans le calcul de la largeur */
+// }
 
-.auth-buttons .btn {
-  padding: 8px 15px;
-  background-color: #007bff;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 5px;
-  font-weight: bold;
-  min-width: 100px;
-  text-align: center;
-  white-space: nowrap; /* Empêche le texte de se couper */
-  box-sizing: border-box; /* S'assure que le padding et la bordure ne dépassent pas */
-  max-width: 150px; /* Limite la largeur maximale des boutons */
-  opacity: 0;
-  animation: slideSci .5s ease forwards;
-  animation-delay: calc(.2s * var(--i));
-}
+// .auth-buttons .btn {
+//   padding: 8px 15px;
+//   background-color: #007bff;
+//   color: #fff;
+//   text-decoration: none;
+//   border-radius: 5px;
+//   font-weight: bold;
+//   min-width: 100px;
+//   text-align: center;
+//   white-space: nowrap; /* Empêche le texte de se couper */
+//   box-sizing: border-box; /* S'assure que le padding et la bordure ne dépassent pas */
+//   max-width: 150px; /* Limite la largeur maximale des boutons */
+//   opacity: 0;
+//   animation: slideSci .5s ease forwards;
+//   animation-delay: calc(.2s * var(--i));
+// }
 
-.auth-buttons .btn:hover {
-  background-color: #0056b3;
-}
+// .auth-buttons .btn:hover {
+//   background-color: #0056b3;
+// }
 
 
 @keyframes slideRight{
@@ -86,42 +86,42 @@
   }
 }
 
-@keyframes slideTop{
-  0%{
-      transform: translateY(100px);
-      opacity: 0;
-  }
-  100%{
-      transform: translateY(0);
-      opacity: 1;
-  }
-}
+// @keyframes slideTop{
+//   0%{
+//       transform: translateY(100px);
+//       opacity: 0;
+//   }
+//   100%{
+//       transform: translateY(0);
+//       opacity: 1;
+//   }
+// }
 
 
 
-@keyframes slideSci{
-  0%{
-      transform: translateX(100px) ;
-      opacity: 0;
-  }
-  100%{
-      transform: translateX(0) ;
-      opacity: 1;
-  }
-}
+// @keyframes slideSci{
+//   0%{
+//       transform: translateX(100px) ;
+//       opacity: 0;
+//   }
+//   100%{
+//       transform: translateX(0) ;
+//       opacity: 1;
+//   }
+// }
 
-.profile-menu {
-  display: flex;
-  align-items: center;
-}
+// .profile-menu {
+//   display: flex;
+//   align-items: center;
+// }
 
-.profile-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  margin-right: 10px;
-}
+// .profile-icon {
+//   width: 40px;
+//   height: 40px;
+//   border-radius: 50%;
+//   margin-right: 10px;
+// }
 
-.auth-buttons .btn {
-  margin-left: 10px;
-}
+// .auth-buttons .btn {
+//   margin-left: 10px;
+// }
